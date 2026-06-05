@@ -1,10 +1,13 @@
 package com.ssafy.wp.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -49,15 +52,22 @@ public class MemberController {
 		}
 	}
 	
-	@PutMapping
-	public ResponseEntity<Member> update(@RequestBody Member member){
+	@PatchMapping
+	public ResponseEntity<?> update(@RequestBody Member member){
 		
+		int memberId =1;
+		member.setId(memberId);
 		int result = mService.update(member);
 		
 		if (result > 0) {
-			return ResponseEntity.ok(member);
+			Member updatedMember = mService.select(member.getId());
+			return ResponseEntity.ok( Map.of(
+                    "message", "회원 정보 수정 성공",
+                    "data", updatedMember
+            ));
 		} else {
-			return ResponseEntity.badRequest().build();
+			return  ResponseEntity.badRequest()
+                    .body(Map.of("message", "잘못된 입력"));
 		}
 	}
 	
