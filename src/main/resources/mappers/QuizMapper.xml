@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.ssafy.wp.model.dao.QuizDao">
+
+	<select id="select" resultType="Quiz">
+		SELECT id, user_id, title, image, level ,created_time
+		FROM quiz
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectAll" resultType="Quiz">
+		SELECT id, user_id, title, image, level ,created_time
+		FROM quiz
+		WHERE user_id = #{userId}
+	</select>
+	
+	<insert id="insert" parameterType="Quiz">
+		INSERT INTO quiz
+			(user_id, title, image, level)
+		VALUES
+			(#{userId}, #{title}, #{image}, #{level})
+	</insert>
+	
+	<update id="update">
+		UPDATE quiz
+		<set>
+			<if test="title != null and title != ''">
+				title = #{title},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM quiz
+		WHERE
+			id = #{id}
+	</delete>
+</mapper>
