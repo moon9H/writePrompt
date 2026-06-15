@@ -27,4 +27,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return new CustomUserDetails(member);
     }
+    
+    
+ // JWT 검증 필터에서 사용
+    public CustomUserDetails loadUserById(int memberId) {
+        Member member = memberDao.select(memberId);
+
+        if (member == null) {
+            throw new UsernameNotFoundException("존재하지 않는 회원입니다.");
+        }
+
+        return new CustomUserDetails(member);
+    }
 }
