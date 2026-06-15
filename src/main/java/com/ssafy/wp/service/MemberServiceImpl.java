@@ -1,6 +1,7 @@
 package com.ssafy.wp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.wp.model.dao.MemberDao;
@@ -14,6 +15,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private final MemberDao mDao;
+	private final PasswordEncoder passwordEncoder;
 	
 	@Override
 	public Member select(int id) {
@@ -22,7 +24,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insert(Member member) {
-		return mDao.insert(member);
+		String encodedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encodedPassword);
+
+        return mDao.insert(member);
 	}
 
 	@Override
