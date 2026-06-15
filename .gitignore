@@ -40,3 +40,7 @@ src/main/resources/application-*.yml
 
 ### Runtime Generated Files ###
 uploads/
+
+### macOS ###
+.DS_Store
+**/.DS_Store

@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.ssafy.wp.model.dto.ai.ImageCompareRequest;
+import com.ssafy.wp.model.dto.ai.ImageCompareResponse;
+import com.ssafy.wp.model.dto.ai.ImageCompareResult;
 import com.ssafy.wp.model.dto.ai.ImageGenerateRequest;
 import com.ssafy.wp.model.dto.ai.ImageGenerateResponse;
 import com.ssafy.wp.model.dto.ai.PromptGenerateRequest;
 import com.ssafy.wp.model.dto.ai.PromptGenerateResponse;
+import com.ssafy.wp.service.ImageCompareService;
 import com.ssafy.wp.service.ImageGenerationService;
 import com.ssafy.wp.service.PromptGenerationService;
 
@@ -25,6 +28,36 @@ public class AiController {
 	
 	private final ImageGenerationService igService;
 	private final PromptGenerationService pgService;
+	private final ImageCompareService icService;
+	
+	@PostMapping("/compare")
+	public ResponseEntity<ImageCompareResponse> compareImages(
+			@RequestBody ImageCompareRequest request){
+		if (request == null
+				|| isBlank(request.getAnswerImageUrl())
+				|| isBlank(request.getStudentImageUrl())) {
+			return ResponseEntity.badRequest()
+	                .body(new ImageCompareResponse("잘못된 입력", null));
+		}
+		
+		try {
+			ImageCompareResult result = icService.compareImages(request);
+			
+			return ResponseEntity.ok(
+	                new ImageCompareResponse("이미지 비교 성공", result)
+	        );
+		} catch (IllegalStateException e) {
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+	                .body(new ImageCompareResponse("이미지 비교 실패", null));
+		} catch (IllegalArgumentException e) {
+		    return ResponseEntity.badRequest()
+		            .body(new ImageCompareResponse("잘못된 입력", null));
+
+		} catch (Exception e) {
+		    return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+		            .body(new ImageCompareResponse("이미지 비교 실패", null));
+		}
+	}
 	
 	@PostMapping("/image")
 	public ResponseEntity<ImageGenerateResponse> generateImage(
@@ -86,5 +119,4 @@ public class AiController {
     private boolean isBlank(String value) {
         return value == null || value.isBlank();
     }
-	
 }
