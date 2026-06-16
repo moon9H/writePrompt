@@ -34,5 +34,14 @@
 		WHERE user_id = #{userId}
 		ORDER BY created_time DESC
 	</select>
+	
+	<insert id="insert" parameterType="QuizRoom"
+			useGeneratedKeys="true"
+			keyProperty="id">
+		INSERT INTO QuizRoom
+			(user_id, title, level, description)
+		VALUES
+			(#{userId}, #{title}, #{roomCode}, #{state}, #{level}, #{description})
+	</insert>
 
 </mapper>

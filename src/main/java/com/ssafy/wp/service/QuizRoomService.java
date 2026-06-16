@@ -11,4 +11,7 @@ public interface QuizRoomService {
 	
 	// 특정 교사가 생성한 퀴즈룸 전체 조회
 	List<QuizRoom> selectAllByUserId(int userId);
+	
+	// 퀴즈룸 생성
+	int insert(QuizRoom quizRoom);
 }
