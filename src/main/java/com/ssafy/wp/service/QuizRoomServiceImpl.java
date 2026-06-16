@@ -1,5 +1,7 @@
 package com.ssafy.wp.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.ssafy.wp.model.dao.QuizRoomDao;
@@ -14,7 +16,12 @@ public class QuizRoomServiceImpl implements QuizRoomService {
 	private final QuizRoomDao qrDao;
 	
 	@Override
-	public QuizRoom select(Long id) {
+	public QuizRoom select(int id) {
 		return qrDao.select(id);
+	}
+
+	@Override
+	public List<QuizRoom> selectAllByUserId(int userId) {
+		return qrDao.selectAllByUserId(userId);
 	}
 }

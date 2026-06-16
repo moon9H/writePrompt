@@ -11,14 +11,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuizRoom {
-	private Long id;
-	private Long userId;
+	private int id;
+	private int userId;
 	private String title;
 	private LocalDateTime createdTime;
 	private String roomCode;
 	private String state;
 	private String level;
 	private String description;
-	private Long solvedCnt;
-	private Long like;
+	private int solvedCnt;
+	private int like;
 }

@@ -18,5 +18,21 @@
 		FROM QuizRoom
 		WHERE id = #{id}
 	</select>
+	
+	<select id="selectAllByUserId" resultType="QuizRoom">
+		SELECT id,
+			   user_id,
+			   title,
+			   created_time,
+			   room_code,
+			   state,
+			   level,
+			   description,
+			   solved_cnt,
+			   `like`
+		FROM QuizRoom
+		WHERE user_id = #{userId}
+		ORDER BY created_time DESC
+	</select>
 
 </mapper>
