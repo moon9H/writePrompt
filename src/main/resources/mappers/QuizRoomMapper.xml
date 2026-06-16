@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.wp.model.dao.QuizRoomDao">
 
-	<select id="select" resultType="QuizRoomResponse">
+	<select id="select" resultType="QuizRoomDetailResponse">
 		SELECT id,
 			   user_id,
 			   title,
@@ -19,7 +19,7 @@
 		WHERE id = #{id}
 	</select>
 	
-	<select id="selectQuizListByRoomId" resultType="QuizInRoomResponse">
+	<select id="selectQuizListByRoomId" resultType="QuizInRoomDTO">
 		SELECT q.id AS quiz_id,
 			   q.title,
 			   q.image,
@@ -52,9 +52,29 @@
 			useGeneratedKeys="true"
 			keyProperty="id">
 		INSERT INTO QuizRoom
-			(user_id, title, level, description)
+			(user_id, title, room_code, state, level, description)
 		VALUES
 			(#{userId}, #{title}, #{roomCode}, #{state}, #{level}, #{description})
 	</insert>
-
+	
+	<insert id="insertQuizIntoQuizRoom">
+		INSERT INTO Quiz_QuizRoom
+			(quiz_room_id, quiz_id, quiz_order)
+		VALUES
+			(#{quizRoomId}, #{quizId}, #{quizOrder})
+	</insert>
+	
+	<update id="update" parameterType="QuizRoom">
+		UPDATE QuizRoom
+		SET title = #{title},
+			level = #{level},
+			description = #{description}
+		WHERE id = #{id}
+		  AND user_id = #{userId}
+	</update>
+	
+	<delete id="deleteQuizListByRoomId">
+		DELETE FROM Quiz_QuizRoom
+		WHERE quiz_room_id = #{quizRoomId}
+	</delete>
 </mapper>

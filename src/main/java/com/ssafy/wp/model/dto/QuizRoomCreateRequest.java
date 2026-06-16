@@ -1,5 +1,8 @@
 package com.ssafy.wp.model.dto;
 
+import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,10 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class QuizInRoomResponse {
-	private int quizId;
+@AllArgsConstructor
+public class QuizRoomCreateRequest {
 	private String title;
-	private String image;
 	private String level;
-	private int quizOrder;
+	private String description;
+	private List<QuizInRoomDTO> quizList;
 }

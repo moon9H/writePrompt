@@ -3,6 +3,7 @@ package com.ssafy.wp.model.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class QuizRoomResponse {
+@AllArgsConstructor
+public class QuizRoomDetailResponse {
 	private int id;
 	private int userId;
 	private String title;
@@ -22,5 +24,5 @@ public class QuizRoomResponse {
 	private int solvedCnt;
 	private int like;
 
-	private List<QuizInRoomResponse> quizList;
+	private List<QuizInRoomDTO> quizList;
 }
