@@ -54,7 +54,7 @@ public class SecurityConfig {
                                 "/error"
                         ).permitAll()
 
-                        .requestMatchers("/api/quiz/**","/api/quizroomd/**").hasRole("TEACHER")
+                        .requestMatchers("/api/quiz/**","/api/quizroom/**").hasRole("TEACHER")
                         .anyRequest().authenticated()
                 )
 
