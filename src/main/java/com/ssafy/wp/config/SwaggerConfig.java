@@ -12,8 +12,8 @@ public class SwaggerConfig {
 	public OpenAPI openAPI() {
 		return new OpenAPI()
 				.info(new Info()
-						.title("멤버 관리 API")
+						.title("Write Prompt API")
 						.version("1.0.0")
-						.description("회원 관리를 위한 API입니다"));
+						.description("Write Prompt 서비스를 위한 API입니다"));
 	}
 }
