@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -118,6 +119,25 @@ public class QuizRoomController {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
 				"message", "찾을 수 없음"
+		));
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@AuthenticationPrincipal CustomUserDetails userDetails,
+									@PathVariable("id") int id) {
+
+		int userId = userDetails.getId();
+
+		int result = qrService.delete(id, userId);
+
+		if (result > 0) {
+			return ResponseEntity.ok(Map.of(
+					"message", "퀴즈룸 삭제 성공"
+			));
+		}
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+				"message", "퀴즈룸을 찾을 수 없거나 삭제 권한이 없습니다."
 		));
 	}
 }

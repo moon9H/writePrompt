@@ -74,7 +74,17 @@
 	</update>
 	
 	<delete id="deleteQuizListByRoomId">
-		DELETE FROM Quiz_QuizRoom
-		WHERE quiz_room_id = #{quizRoomId}
+		DELETE qqr
+		FROM Quiz_QuizRoom qqr
+		JOIN QuizRoom qr
+		  ON qqr.quiz_room_id = qr.id
+		WHERE qqr.quiz_room_id = #{quizRoomId}
+		  AND qr.user_id = #{userId}
+	</delete>
+	
+	<delete id="delete">
+		DELETE FROM QuizRoom
+		WHERE id = #{id}
+		  AND user_id = #{userId}
 	</delete>
 </mapper>

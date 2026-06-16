@@ -19,4 +19,7 @@ public interface QuizRoomService {
 	
 	// 퀴즈룸 수정
 	int update(int id, int userId, QuizRoomCreateRequest request);
+	
+	// 퀴즈룸 삭제
+	int delete(int id, int userId);
 }

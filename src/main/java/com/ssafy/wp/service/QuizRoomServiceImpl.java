@@ -85,7 +85,7 @@ public class QuizRoomServiceImpl implements QuizRoomService {
 		}
 		
 		// 기존 연결된 퀴즈 목록 삭제
-		qrDao.deleteQuizListByRoomId(id);
+		qrDao.deleteQuizListByRoomId(id, userId);
 		
 		// 요청으로 받은 퀴즈 목록 다시 연결
 		for (QuizInRoomDTO quiz : request.getQuizList()) {
@@ -96,5 +96,16 @@ public class QuizRoomServiceImpl implements QuizRoomService {
 			);
 		}
 		return result;
+	}
+
+	@Override
+	@Transactional
+	public int delete(int id, int userId) {
+		
+		// 1. 연결 테이블 삭제
+		qrDao.deleteQuizListByRoomId(id, userId);
+		
+		// 2. 퀴즈룸 삭제
+		return qrDao.delete(id, userId);
 	}
 }

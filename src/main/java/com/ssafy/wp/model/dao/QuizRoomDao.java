@@ -33,5 +33,10 @@ public interface QuizRoomDao {
 	int update(QuizRoom quizRoom);
 	
 	// 퀴즈룸에 연결되어 있던 기존 퀴즈 목록 삭제 (퀴즈룹 수정 시, Quiz_QuizRoom table에 있던 것 다 지우고 다시 삽입)
-	int deleteQuizListByRoomId(int quizRoomId);
+	int deleteQuizListByRoomId(@Param("quizRoomId") int quizRoomId,
+								@Param("userId") int userId);
+
+	//퀴즈룸 삭제
+	int delete(@Param("id") int id,
+				@Param("userId") int userId);
 }
