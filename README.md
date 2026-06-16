@@ -33,14 +33,14 @@
 ---
 
 # ERD
-<img src="ERD.png">
+<img src="docs/ERD.png">
 
 ---
 
 # Member API
-<img src="memberAPI.png">
+<img src="docs/memberAPI.png">
 
 ---
 
 # Wireframe
-<img src="wireframe.png">
+<img src="docs/wireframe.png">
