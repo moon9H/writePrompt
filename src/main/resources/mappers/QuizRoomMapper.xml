@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.wp.model.dao.QuizRoomDao">
 
-	<select id="select" resultType="QuizRoom">
+	<select id="select" resultType="QuizRoomResponse">
 		SELECT id,
 			   user_id,
 			   title,
@@ -17,6 +17,19 @@
 			   `like`
 		FROM QuizRoom
 		WHERE id = #{id}
+	</select>
+	
+	<select id="selectQuizListByRoomId" resultType="QuizInRoomResponse">
+		SELECT q.id AS quiz_id,
+			   q.title,
+			   q.image,
+			   q.level,
+			   qqr.quiz_order
+		FROM Quiz_QuizRoom qqr
+		JOIN Quiz q
+		  ON qqr.quiz_id = q.id
+		WHERE qqr.quiz_room_id = #{quizRoomId}
+		ORDER BY qqr.quiz_order
 	</select>
 	
 	<select id="selectAllByUserId" resultType="QuizRoom">

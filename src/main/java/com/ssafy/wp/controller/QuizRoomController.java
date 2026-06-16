@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wp.model.dto.QuizRoom;
+import com.ssafy.wp.model.dto.QuizRoomResponse;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.QuizRoomService;
 
@@ -29,7 +30,7 @@ public class QuizRoomController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> select(@PathVariable("id") int id){
 		
-		QuizRoom quizRoom = qrService.select(id);
+		QuizRoomResponse quizRoom = qrService.select(id);
 		
 		if (quizRoom != null) {
 			return ResponseEntity.ok(Map.of(
@@ -55,25 +56,25 @@ public class QuizRoomController {
 		));
 	}
 	
-	@PostMapping
-
-	public ResponseEntity<?> insert(@AuthenticationPrincipal CustomUserDetails userDetails,
-
-									@RequestBody QuizRoom quizRoom) {
-		int userId = userDetails.getId();
-		// user_id는 요청 body가 아니라 토큰에서 가져온 교사 id 사용
-		quizRoom.setUserId(userId);
-		int result = qrService.insert(quizRoom);
-		if (result > 0) {
-			QuizRoom findQuizRoom = qrService.select(quizRoom.getId());
-			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
-					"message", "퀴즈룸 생성 성공",
-					"data", findQuizRoom
-			));
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-				"message", "퀴즈룸 생성 실패"
-		));
-
-	}
+//	@PostMapping
+//
+//	public ResponseEntity<?> insert(@AuthenticationPrincipal CustomUserDetails userDetails,
+//
+//									@RequestBody QuizRoom quizRoom) {
+//		int userId = userDetails.getId();
+//		// user_id는 요청 body가 아니라 토큰에서 가져온 교사 id 사용
+//		quizRoom.setUserId(userId);
+//		int result = qrService.insert(quizRoom);
+//		if (result > 0) {
+//			QuizRoom findQuizRoom = qrService.select(quizRoom.getId());
+//			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
+//					"message", "퀴즈룸 생성 성공",
+//					"data", findQuizRoom
+//			));
+//		}
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
+//				"message", "퀴즈룸 생성 실패"
+//		));
+//
+//	}
 }
