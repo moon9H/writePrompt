@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wp.model.dto.Quiz;
+import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.QuizService;
 
 import lombok.RequiredArgsConstructor;
@@ -42,10 +44,10 @@ public class QuizController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> selectAll(){
+	public ResponseEntity<?> selectAll(@AuthenticationPrincipal CustomUserDetails userDetails){
 		
 		// 나중에 JWT 배우고 나서 교체 예정
-		int userId = 1;
+		int userId = userDetails.getId();
 		List<Quiz> qList = qService.selectAll(userId);
 		
 		if (qList != null) {

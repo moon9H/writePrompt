@@ -17,4 +17,6 @@ public interface MemberDao {
 	
 	// 회원 삭제
 	int delete(int id);
+
+	Member selectByEmail(String email);
 }
