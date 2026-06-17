@@ -44,14 +44,17 @@ public class SecurityConfig {
                 // URL별 권한 설정
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
+                        		"/",
+                                "/index.html",
                                 "/api/auth/login",
                                 "/api/members",
+                                "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
                                 "/error"
                         ).permitAll()
 
-                        .requestMatchers("/api/quiz/**","/api/quiz/roomd/*").hasRole("TEACHER")
+                        .requestMatchers("/api/quiz/**","/api/quizroom/**").hasRole("TEACHER")
                         .anyRequest().authenticated()
                 )
 

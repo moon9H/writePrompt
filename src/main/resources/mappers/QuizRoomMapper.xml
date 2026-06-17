@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.wp.model.dao.QuizRoomDao">
+
+	<select id="select" resultType="QuizRoomDetailResponse">
+		SELECT id,
+			   user_id,
+			   title,
+			   created_time,
+			   room_code,
+			   state,
+			   level,
+			   description,
+			   solved_cnt,
+			   `like`
+		FROM QuizRoom
+		WHERE id = #{id}
+	</select>
+	
+	<select id="selectQuizListByRoomId" resultType="QuizInRoomDTO">
+		SELECT q.id AS quiz_id,
+			   q.title,
+			   q.image,
+			   q.level,
+			   qqr.quiz_order
+		FROM Quiz_QuizRoom qqr
+		JOIN Quiz q
+		  ON qqr.quiz_id = q.id
+		WHERE qqr.quiz_room_id = #{quizRoomId}
+		ORDER BY qqr.quiz_order
+	</select>
+	
+	<select id="selectAllByUserId" resultType="QuizRoom">
+		SELECT id,
+			   user_id,
+			   title,
+			   created_time,
+			   room_code,
+			   state,
+			   level,
+			   description,
+			   solved_cnt,
+			   `like`
+		FROM QuizRoom
+		WHERE user_id = #{userId}
+		ORDER BY created_time DESC
+	</select>
+	
+	<insert id="insert" parameterType="QuizRoom"
+			useGeneratedKeys="true"
+			keyProperty="id">
+		INSERT INTO QuizRoom
+			(user_id, title, room_code, state, level, description)
+		VALUES
+			(#{userId}, #{title}, #{roomCode}, #{state}, #{level}, #{description})
+	</insert>
+	
+	<insert id="insertQuizIntoQuizRoom">
+		INSERT INTO Quiz_QuizRoom
+			(quiz_room_id, quiz_id, quiz_order)
+		VALUES
+			(#{quizRoomId}, #{quizId}, #{quizOrder})
+	</insert>
+	
+	<update id="update" parameterType="QuizRoom">
+		UPDATE QuizRoom
+		SET title = #{title},
+			level = #{level},
+			description = #{description},
+			state = #{state}
+		WHERE id = #{id}
+		  AND user_id = #{userId}
+	</update>
+	
+	<delete id="deleteQuizListByRoomId">
+		DELETE qqr
+		FROM Quiz_QuizRoom qqr
+		JOIN QuizRoom qr
+		  ON qqr.quiz_room_id = qr.id
+		WHERE qqr.quiz_room_id = #{quizRoomId}
+		  AND qr.user_id = #{userId}
+	</delete>
+	
+	<delete id="delete">
+		DELETE FROM QuizRoom
+		WHERE id = #{id}
+		  AND user_id = #{userId}
+	</delete>
+</mapper>
