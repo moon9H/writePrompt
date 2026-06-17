@@ -21,6 +21,11 @@ public class QuizRoomServiceImpl implements QuizRoomService {
 	private final QuizRoomDao qrDao;
 	
 	@Override
+	public List<QuizRoom> selectAllByUserId(int userId) {
+		return qrDao.selectAllByUserId(userId);
+	}
+	
+	@Override
 	public QuizRoomDetailResponse select(int id) {
 		
 		QuizRoomDetailResponse quizRoom = qrDao.select(id);
@@ -36,22 +41,18 @@ public class QuizRoomServiceImpl implements QuizRoomService {
 	}
 
 	@Override
-	public List<QuizRoom> selectAllByUserId(int userId) {
-		return qrDao.selectAllByUserId(userId);
-	}
-
-	@Override
 	@Transactional
 	public int insert(int userId, QuizRoomCreateRequest request) {
 		
 		QuizRoom quizRoom = new QuizRoom();
 		quizRoom.setUserId(userId);
 		quizRoom.setTitle(request.getTitle());
+		quizRoom.setState(request.getState());
 		quizRoom.setLevel(request.getLevel());
 		quizRoom.setDescription(request.getDescription());
 		// UUID 기반 랜덤으로 RoomCode 설정
 		quizRoom.setRoomCode(UUID.randomUUID().toString().substring(0, 8));
-		quizRoom.setState("OPEN");
+		
 		
 		int result = qrDao.insert(quizRoom);
 		
@@ -75,6 +76,7 @@ public class QuizRoomServiceImpl implements QuizRoomService {
 		quizRoom.setId(id);
 		quizRoom.setUserId(userId);
 		quizRoom.setTitle(request.getTitle());
+		quizRoom.setState(request.getState());
 		quizRoom.setLevel(request.getLevel());
 		quizRoom.setDescription(request.getDescription());
 		

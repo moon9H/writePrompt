@@ -15,5 +15,6 @@ public class QuizRoomCreateRequest {
 	private String title;
 	private String level;
 	private String description;
+    private String state;
 	private List<QuizInRoomDTO> quizList;
 }

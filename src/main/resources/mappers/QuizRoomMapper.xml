@@ -68,7 +68,8 @@
 		UPDATE QuizRoom
 		SET title = #{title},
 			level = #{level},
-			description = #{description}
+			description = #{description},
+			state = #{state}
 		WHERE id = #{id}
 		  AND user_id = #{userId}
 	</update>
