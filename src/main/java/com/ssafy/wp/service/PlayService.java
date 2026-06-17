@@ -3,6 +3,7 @@ package com.ssafy.wp.service;
 import java.util.List;
 
 import com.ssafy.wp.model.dto.QuizRoom;
+import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
 
 public interface PlayService {
 	
@@ -14,4 +15,7 @@ public interface PlayService {
 	
 	// 퀴즈룹 좋아요 기능
 	int increaseLike(int id);
+	
+	// 퀴즈룸 입장을 위한 상세 조회
+	QuizRoomDetailResponse selectDetail(int id);
 }

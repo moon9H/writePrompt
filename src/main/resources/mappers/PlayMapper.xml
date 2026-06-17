@@ -42,5 +42,34 @@
 		SET `like` = `like` + 1
 		WHERE id = #{id}
 	</update>
+	
+	<select id="selectDetail" resultType="QuizRoomDetailResponse">
+		SELECT id,
+			   user_id,
+			   title,
+			   created_time,
+			   room_code,
+			   state,
+			   level,
+			   description,
+			   solved_cnt,
+			   `like`
+		FROM QuizRoom
+		WHERE id = #{id}
+		  AND state = 'OPEN'
+	</select>
+	
+	<select id="selectQuizList" resultType="QuizInRoomDTO">
+		SELECT q.id AS quiz_id,
+			   q.title,
+			   q.image,
+			   q.level,
+			   qqr.quiz_order
+		FROM Quiz_QuizRoom qqr
+		JOIN Quiz q
+		  ON qqr.quiz_id = q.id
+		WHERE qqr.quiz_room_id = #{quizRoomId}
+		ORDER BY qqr.quiz_order
+	</select>
 
 </mapper>

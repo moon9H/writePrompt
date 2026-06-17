@@ -3,6 +3,7 @@ package com.ssafy.wp.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wp.model.dto.QuizRoom;
+import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
+import com.ssafy.wp.service.ImageCompareService;
 import com.ssafy.wp.service.PlayService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class PlayController {
 	
 	private final PlayService playService;
+	private final ImageCompareService icService;
 	
 	@Operation(
 		summary = "플레이 가능한 퀴즈룸 전체 조회",
@@ -71,6 +75,25 @@ public class PlayController {
 		} else {
 			return ResponseEntity.badRequest().body(Map.of(
 					"message", "잘못된 요청"));
+		}
+	}
+	
+	@Operation(
+		summary = "퀴즈룸 입장",
+		description = "유저가 OPEN 상태의 퀴즈룸에 입장하고 퀴즈 목록을 조회"
+	)
+	@GetMapping("/{id}")
+	public ResponseEntity<?> selectDetail(@PathVariable("id") int id) {
+		
+		QuizRoomDetailResponse quizRoom = playService.selectDetail(id);
+		
+		if (quizRoom == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(Map.of("message", "존재하지 않는 퀴즈룸"));
+		} else {
+			return ResponseEntity.ok(Map.of(
+									"message", "퀴즈룸 입장 성공",
+									"data", quizRoom));
 		}
 	}
 }
