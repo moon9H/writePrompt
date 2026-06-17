@@ -19,5 +19,22 @@
 		WHERE state = 'OPEN'
 		ORDER BY created_time DESC
 	</select>
+	
+	<select id="searchByTitle" resultType="QuizRoom">
+		SELECT id,
+			   user_id,
+			   title,
+			   created_time,
+			   room_code,
+			   state,
+			   level,
+			   description,
+			   solved_cnt,
+			   `like`
+		FROM QuizRoom
+		WHERE state = 'OPEN'
+		  AND title LIKE CONCAT('%', #{title}, '%')
+		ORDER BY created_time DESC
+	</select>
 
 </mapper>

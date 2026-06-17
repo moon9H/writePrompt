@@ -19,5 +19,9 @@ public class PlayServiceImpl implements PlayService {
 	public List<QuizRoom> selectAll() {
 		return playDao.selectAll();
 	}
-	
+
+	@Override
+	public List<QuizRoom> searchByTitle(String title) {
+		return playDao.searchByTitle(title);
+	}
 }
