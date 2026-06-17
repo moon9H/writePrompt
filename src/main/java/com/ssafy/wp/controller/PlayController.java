@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +54,23 @@ public class PlayController {
 				"data", qRooms
 		));
 
+	}
+	
+	@Operation(
+		summary = "퀴즈룸 좋아요 등록",
+		description = "퀴즈룸 좋아요 수 +1"
+	)
+	@PostMapping("/like/{id}")
+	public ResponseEntity<?> increaseLike(@PathVariable int id){
+		
+		int result = playService.increaseLike(id);
+		
+		if (result > 0) {
+			return ResponseEntity.ok(Map.of(
+					"message", "좋아요 성공"));
+		} else {
+			return ResponseEntity.badRequest().body(Map.of(
+					"message", "잘못된 요청"));
+		}
 	}
 }

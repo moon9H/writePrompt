@@ -24,4 +24,9 @@ public class PlayServiceImpl implements PlayService {
 	public List<QuizRoom> searchByTitle(String title) {
 		return playDao.searchByTitle(title);
 	}
+
+	@Override
+	public int increaseLike(int id) {
+		return playDao.increaseLike(id);
+	}
 }

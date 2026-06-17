@@ -36,5 +36,11 @@
 		  AND title LIKE CONCAT('%', #{title}, '%')
 		ORDER BY created_time DESC
 	</select>
+	
+	<update id="increaseLike">
+		UPDATE QuizRoom
+		SET `like` = `like` + 1
+		WHERE id = #{id}
+	</update>
 
 </mapper>

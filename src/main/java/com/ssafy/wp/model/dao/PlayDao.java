@@ -14,4 +14,7 @@ public interface PlayDao {
 	
 	// 제목으로 플레이 가능한 퀴즈룸 검색
 	List<QuizRoom> searchByTitle(String title);
+	
+	// 퀴즈룹 좋아요 기능
+	int increaseLike(int id);
 }
