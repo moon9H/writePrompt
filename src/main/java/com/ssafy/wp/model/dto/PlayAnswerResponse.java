@@ -1,13 +1,12 @@
 package com.ssafy.wp.model.dto;
 
-import org.springframework.stereotype.Service;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@Service
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlayAnswerResponse {
