@@ -1,6 +1,6 @@
 package com.ssafy.wp.service;
 
-import com.ssafy.wp.model.dto.Member;
+import com.ssafy.wp.model.dto.member.Member;
 
 public interface MemberService {
 	// id 기반 멤버 조회

@@ -2,10 +2,10 @@ package com.ssafy.wp.service;
 
 import java.util.List;
 
-import com.ssafy.wp.model.dto.PlayAnswerRequest;
-import com.ssafy.wp.model.dto.PlayAnswerResponse;
-import com.ssafy.wp.model.dto.QuizRoom;
-import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
+import com.ssafy.wp.model.dto.play.PlayAnswerRequest;
+import com.ssafy.wp.model.dto.play.PlayAnswerResponse;
+import com.ssafy.wp.model.dto.quizroom.QuizRoom;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
 
 public interface PlayService {
 	

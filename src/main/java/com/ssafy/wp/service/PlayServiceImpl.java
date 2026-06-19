@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.wp.model.dao.PlayDao;
-import com.ssafy.wp.model.dto.PlayAnswerItem;
-import com.ssafy.wp.model.dto.PlayAnswerRequest;
-import com.ssafy.wp.model.dto.PlayAnswerResponse;
-import com.ssafy.wp.model.dto.QuizInRoomDTO;
-import com.ssafy.wp.model.dto.QuizResult;
-import com.ssafy.wp.model.dto.QuizRoom;
-import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
+import com.ssafy.wp.model.dto.play.PlayAnswerItem;
+import com.ssafy.wp.model.dto.play.PlayAnswerRequest;
+import com.ssafy.wp.model.dto.play.PlayAnswerResponse;
+import com.ssafy.wp.model.dto.play.QuizResult;
+import com.ssafy.wp.model.dto.quizroom.QuizInRoomDTO;
+import com.ssafy.wp.model.dto.quizroom.QuizRoom;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
 
 import lombok.RequiredArgsConstructor;
 

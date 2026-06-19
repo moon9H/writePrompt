@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.wp.model.dao.MemberDao;
-import com.ssafy.wp.model.dto.Member;
+import com.ssafy.wp.model.dto.member.Member;
 
 import lombok.RequiredArgsConstructor;
 

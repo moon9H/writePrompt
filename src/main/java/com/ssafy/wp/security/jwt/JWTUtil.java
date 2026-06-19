@@ -8,7 +8,7 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.ssafy.wp.model.dto.Member;
+import com.ssafy.wp.model.dto.member.Member;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

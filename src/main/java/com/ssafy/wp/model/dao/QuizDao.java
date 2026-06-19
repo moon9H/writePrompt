@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ssafy.wp.model.dto.Quiz;
+import com.ssafy.wp.model.dto.quiz.Quiz;
 
 @Mapper
 public interface QuizDao {

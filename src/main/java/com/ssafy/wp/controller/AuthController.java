@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.wp.model.dto.LoginRequest;
-import com.ssafy.wp.model.dto.Member;
+import com.ssafy.wp.model.dto.auth.LoginRequest;
+import com.ssafy.wp.model.dto.member.Member;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.security.jwt.JWTUtil;
 

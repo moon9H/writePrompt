@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.wp.model.dao.QuizRoomDao;
-import com.ssafy.wp.model.dto.QuizInRoomDTO;
-import com.ssafy.wp.model.dto.QuizRoom;
-import com.ssafy.wp.model.dto.QuizRoomCreateRequest;
-import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
+import com.ssafy.wp.model.dto.quizroom.QuizInRoomDTO;
+import com.ssafy.wp.model.dto.quizroom.QuizRoom;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomCreateRequest;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
 
 import lombok.RequiredArgsConstructor;
 

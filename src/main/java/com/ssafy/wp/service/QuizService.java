@@ -2,7 +2,7 @@ package com.ssafy.wp.service;
 
 import java.util.List;
 
-import com.ssafy.wp.model.dto.Quiz;
+import com.ssafy.wp.model.dto.quiz.Quiz;
 
 public interface QuizService {
 	

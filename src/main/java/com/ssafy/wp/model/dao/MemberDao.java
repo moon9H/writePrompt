@@ -2,7 +2,7 @@ package com.ssafy.wp.model.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ssafy.wp.model.dto.Member;
+import com.ssafy.wp.model.dto.member.Member;
 @Mapper
 public interface MemberDao {
 	

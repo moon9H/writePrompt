@@ -1,8 +1,6 @@
-package com.ssafy.wp.model.dto;
+package com.ssafy.wp.model.dto.quizroom;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizRoomDetailResponse {
+// DB 테이블용 DTO
+public class QuizRoom {
 	private int id;
 	private int userId;
 	private String title;
@@ -23,6 +22,4 @@ public class QuizRoomDetailResponse {
 	private String description;
 	private int solvedCnt;
 	private int like;
-
-	private List<QuizInRoomDTO> quizList;
 }
