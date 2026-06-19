@@ -111,21 +111,13 @@ public class PlayController {
 												@AuthenticationPrincipal CustomUserDetails userDetails) {
 		try {
 			int userId = userDetails.getId();
+						
+			PlayAnswerResponse response = playService.submitFinalAnswer(userId, quizRoomId, request);
 			
-			PlayAnswerResponse aiResponse = playService.submitFinalAnswer(request);
-			
-			int result = playService.insertResult(userId, quizRoomId, aiResponse);
-			
-			if (result > 0) {
-				return ResponseEntity.ok(Map.of(
-						"message", "채점 성공",
-						"data", aiResponse
-				));
-			} else {
-				return ResponseEntity.badRequest().body(Map.of(
-						"message", "최종 결과 저장 실패"
-				));
-			}
+			return ResponseEntity.ok(Map.of(
+					"message", "채점 성공",
+					"data", response
+			));
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.badRequest().body(Map.of(
 					"message", "최종 채점 실패: " + e.getMessage()
