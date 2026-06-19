@@ -1,7 +1,6 @@
 package com.ssafy.wp.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.play.PlayAnswerRequest;
 import com.ssafy.wp.model.dto.play.PlayAnswerResponse;
 import com.ssafy.wp.model.dto.quizroom.QuizRoom;
@@ -43,10 +43,9 @@ public class PlayController {
 		
 		List<QuizRoom> qRooms = playService.selectAll();
 		
-		return ResponseEntity.ok(Map.of(
-				"message", "플레이 가능한 퀴즈룸 전체 조회 성공",
-				"data", qRooms
-		));
+		return ResponseEntity.ok(
+		        ApiResponse.ok("플레이 가능한 퀴즈룸 전체 조회 성공", qRooms)
+		);
 	}
 	
 	@Operation(
@@ -57,10 +56,10 @@ public class PlayController {
 	public ResponseEntity<?> searchByTitle(@RequestParam String title) {
 
 		List<QuizRoom> qRooms = playService.searchByTitle(title);
-		return ResponseEntity.ok(Map.of(
-				"message", "플레이 가능한 퀴즈룸 검색 성공",
-				"data", qRooms
-		));
+		
+		return ResponseEntity.ok(
+		        ApiResponse.ok("플레이 가능한 퀴즈룸 검색 성공", qRooms)
+		);
 
 	}
 	
@@ -74,11 +73,14 @@ public class PlayController {
 		int result = playService.increaseLike(quizRoomId);
 		
 		if (result > 0) {
-			return ResponseEntity.ok(Map.of(
-					"message", "좋아요 성공"));
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("좋아요 성공")
+		    );
+
 		} else {
-			return ResponseEntity.badRequest().body(Map.of(
-					"message", "잘못된 요청"));
+		    return ResponseEntity.badRequest().body(
+		            ApiResponse.fail("잘못된 요청")
+		    );
 		}
 	}
 	
@@ -92,12 +94,13 @@ public class PlayController {
 		QuizRoomDetailResponse quizRoom = playService.selectDetail(quizRoomId);
 		
 		if (quizRoom == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body(Map.of("message", "존재하지 않는 퀴즈룸"));
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+		            ApiResponse.fail("존재하지 않는 퀴즈룸")
+		    );
 		} else {
-			return ResponseEntity.ok(Map.of(
-									"message", "퀴즈룸 입장 성공",
-									"data", quizRoom));
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("퀴즈룸 입장 성공", quizRoom)
+		    );
 		}
 	}
 	
@@ -114,18 +117,18 @@ public class PlayController {
 						
 			PlayAnswerResponse response = playService.submitFinalAnswer(userId, quizRoomId, request);
 			
-			return ResponseEntity.ok(Map.of(
-					"message", "채점 성공",
-					"data", response
-			));
+			return ResponseEntity.ok(
+			        ApiResponse.ok("채점 성공", response)
+			);
+			
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body(Map.of(
-					"message", "최종 채점 실패: " + e.getMessage()
-			));
+			return ResponseEntity.badRequest().body(
+			        ApiResponse.fail("최종 채점 실패: " + e.getMessage())
+			);
 		} catch (Exception e) {
-			return ResponseEntity.internalServerError().body(Map.of(
-					"message", "최종 채점 실패: " + e.getMessage()
-			));
+			return ResponseEntity.internalServerError().body(
+			        ApiResponse.fail("최종 채점 실패: " + e.getMessage())
+			);
 		}
 	}
 }

@@ -1,11 +1,8 @@
 package com.ssafy.wp.controller;
 
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -15,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.member.Member;
+import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,44 +31,51 @@ public class MemberController {
 		Member member = mService.select(id);
 		
 		if (member != null) {
-			return ResponseEntity.ok(Map.of(
-                    "message", "회원 정보 수정 성공",
-                    "data", member));
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("회원 정보 조회 성공", member)
+		    );
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-			        .body(Map.of("message", "회원정보 찾을 수 없음"));
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+		            ApiResponse.fail("회원정보 찾을 수 없음")
+		    );
 		}
 	}
 	
-	@PostMapping // 로그인 기능으로 이동할 예정
-	public ResponseEntity<Member> insert(@RequestBody Member member){
+	@PostMapping
+	public ResponseEntity<?> insert(@RequestBody Member member){
 		
 		int result = mService.insert(member);
 		
 		if (result > 0) {
-			Member findMember = mService.select(member.getId());
-			return ResponseEntity.status(HttpStatus.CREATED).body(findMember);
+		    Member findMember = mService.select(member.getId());
+		    return ResponseEntity.status(HttpStatus.CREATED).body(
+		            ApiResponse.ok("회원가입 성공", findMember)
+		    );
 		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+		            ApiResponse.fail("잘못된 입력")
+		    );
 		}
 	}
 	
 	@PatchMapping
-	public ResponseEntity<?> update(@RequestBody Member member){
+	public ResponseEntity<?> update(@AuthenticationPrincipal CustomUserDetails userDetails,
+	                                @RequestBody Member member){
 		
-		int memberId =1;
+		int memberId = userDetails.getId();
 		member.setId(memberId);
+		
 		int result = mService.update(member);
 		
 		if (result > 0) {
-			Member updatedMember = mService.select(member.getId());
-			return ResponseEntity.ok( Map.of(
-                    "message", "회원 정보 수정 성공",
-                    "data", updatedMember
-            ));
+		    Member updatedMember = mService.select(member.getId());
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("회원 정보 수정 성공", updatedMember)
+		    );
 		} else {
-			return  ResponseEntity.badRequest()
-                    .body(Map.of("message", "잘못된 입력"));
+		    return ResponseEntity.badRequest().body(
+		            ApiResponse.fail("잘못된 입력")
+		    );
 		}
 	}
 	
@@ -79,11 +85,13 @@ public class MemberController {
 		int result = mService.delete(id);
 		
 		if (result > 0) {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT)
-					.body(Map.of("message", "탈퇴 성공"));
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("탈퇴 성공")
+		    );
 		} else {
-			return  ResponseEntity.badRequest()
-                    .body(Map.of("message", "잘못된 입력"));
+		    return ResponseEntity.badRequest().body(
+		            ApiResponse.fail("잘못된 입력")
+		    );
 		}
 	}
 }
