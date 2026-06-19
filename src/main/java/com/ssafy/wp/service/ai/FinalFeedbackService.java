@@ -1,4 +1,4 @@
-package com.ssafy.wp.service;
+package com.ssafy.wp.service.ai;
 
 import java.util.List;
 

@@ -13,6 +13,7 @@ import com.ssafy.wp.model.dto.play.QuizResult;
 import com.ssafy.wp.model.dto.quizroom.QuizInRoomDTO;
 import com.ssafy.wp.model.dto.quizroom.QuizRoom;
 import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
+import com.ssafy.wp.service.ai.FinalFeedbackService;
 
 import lombok.RequiredArgsConstructor;
 
