@@ -1,4 +1,4 @@
-package com.ssafy.wp.model.dto;
+package com.ssafy.wp.model.dto.member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

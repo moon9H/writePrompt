@@ -2,9 +2,9 @@ package com.ssafy.wp.service;
 
 import java.util.List;
 
-import com.ssafy.wp.model.dto.QuizRoom;
-import com.ssafy.wp.model.dto.QuizRoomCreateRequest;
-import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
+import com.ssafy.wp.model.dto.quizroom.QuizRoom;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomCreateRequest;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
 
 public interface QuizRoomService {
 	

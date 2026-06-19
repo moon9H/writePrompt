@@ -1,4 +1,4 @@
-package com.ssafy.wp.model.dto;
+package com.ssafy.wp.model.dto.play;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -2,10 +2,10 @@ package com.ssafy.wp.service;
 
 import java.util.List;
 
-import com.ssafy.wp.model.dto.PlayAnswerRequest;
-import com.ssafy.wp.model.dto.PlayAnswerResponse;
-import com.ssafy.wp.model.dto.QuizRoom;
-import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
+import com.ssafy.wp.model.dto.play.PlayAnswerRequest;
+import com.ssafy.wp.model.dto.play.PlayAnswerResponse;
+import com.ssafy.wp.model.dto.quizroom.QuizRoom;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
 
 public interface PlayService {
 	
@@ -21,9 +21,6 @@ public interface PlayService {
 	// 퀴즈룸 입장을 위한 상세 조회
 	QuizRoomDetailResponse selectDetail(int quizRoomId);
 	
-	// 평균 점수 계산 + AI 최종 총평 생성
-	PlayAnswerResponse submitFinalAnswer(PlayAnswerRequest request);
-	
-	// 최종 결과 DB 저장
-	int insertResult(int userId, int quizRoomId, PlayAnswerResponse response);
+	// 최종 제출 처리: 평균 계산, AI 총평 생성, 결과 저장, solved_cnt 증가
+	PlayAnswerResponse submitFinalAnswer(int userId, int quizRoomId, PlayAnswerRequest request);
 }

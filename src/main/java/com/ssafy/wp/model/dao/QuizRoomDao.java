@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.ssafy.wp.model.dto.QuizInRoomDTO;
-import com.ssafy.wp.model.dto.QuizRoom;
-import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
+import com.ssafy.wp.model.dto.quizroom.QuizInRoomDTO;
+import com.ssafy.wp.model.dto.quizroom.QuizRoom;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
 
 @Mapper
 public interface QuizRoomDao {

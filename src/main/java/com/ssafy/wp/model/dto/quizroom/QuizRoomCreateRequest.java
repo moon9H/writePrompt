@@ -1,4 +1,4 @@
-package com.ssafy.wp.model.dto;
+package com.ssafy.wp.model.dto.quizroom;
 
 import java.util.List;
 

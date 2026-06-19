@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.wp.model.dao.QuizDao;
-import com.ssafy.wp.model.dto.Quiz;
+import com.ssafy.wp.model.dto.quiz.Quiz;
 
 import lombok.RequiredArgsConstructor;
 

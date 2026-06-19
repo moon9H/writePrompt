@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.wp.model.dao.MemberDao;
-import com.ssafy.wp.model.dto.Member;
+import com.ssafy.wp.model.dto.member.Member;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 
 import lombok.RequiredArgsConstructor;

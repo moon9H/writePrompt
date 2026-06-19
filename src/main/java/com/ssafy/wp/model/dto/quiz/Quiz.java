@@ -1,4 +1,4 @@
-package com.ssafy.wp.model.dto;
+package com.ssafy.wp.model.dto.quiz;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package com.ssafy.wp.config.ai;
+package com.ssafy.wp.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.openai.OpenAiChatModel;

@@ -1,4 +1,4 @@
-package com.ssafy.wp.service;
+package com.ssafy.wp.service.ai;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.ssafy.wp.model.dto.PlayAnswerItem;
+import com.ssafy.wp.model.dto.play.PlayAnswerItem;
 
 @Service
 public class FinalFeedbackService {

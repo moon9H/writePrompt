@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafy.wp.model.dto.PlayAnswerRequest;
-import com.ssafy.wp.model.dto.PlayAnswerResponse;
-import com.ssafy.wp.model.dto.QuizRoom;
-import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
+import com.ssafy.wp.model.dto.play.PlayAnswerRequest;
+import com.ssafy.wp.model.dto.play.PlayAnswerResponse;
+import com.ssafy.wp.model.dto.quizroom.QuizRoom;
+import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.PlayService;
 
@@ -111,21 +111,13 @@ public class PlayController {
 												@AuthenticationPrincipal CustomUserDetails userDetails) {
 		try {
 			int userId = userDetails.getId();
+						
+			PlayAnswerResponse response = playService.submitFinalAnswer(userId, quizRoomId, request);
 			
-			PlayAnswerResponse aiResponse = playService.submitFinalAnswer(request);
-			
-			int result = playService.insertResult(userId, quizRoomId, aiResponse);
-			
-			if (result > 0) {
-				return ResponseEntity.ok(Map.of(
-						"message", "채점 성공",
-						"data", aiResponse
-				));
-			} else {
-				return ResponseEntity.badRequest().body(Map.of(
-						"message", "최종 결과 저장 실패"
-				));
-			}
+			return ResponseEntity.ok(Map.of(
+					"message", "채점 성공",
+					"data", response
+			));
 		} catch (IllegalArgumentException e) {
 			return ResponseEntity.badRequest().body(Map.of(
 					"message", "최종 채점 실패: " + e.getMessage()

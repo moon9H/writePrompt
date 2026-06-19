@@ -1,4 +1,4 @@
-package com.ssafy.wp.service;
+package com.ssafy.wp.service.ai;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -15,9 +15,9 @@ import com.ssafy.wp.model.dto.ai.ImageGenerateRequest;
 import com.ssafy.wp.model.dto.ai.ImageGenerateResponse;
 import com.ssafy.wp.model.dto.ai.PromptGenerateRequest;
 import com.ssafy.wp.model.dto.ai.PromptGenerateResponse;
-import com.ssafy.wp.service.ImageCompareService;
-import com.ssafy.wp.service.ImageGenerationService;
-import com.ssafy.wp.service.PromptGenerationService;
+import com.ssafy.wp.service.ai.ImageCompareService;
+import com.ssafy.wp.service.ai.ImageGenerationService;
+import com.ssafy.wp.service.ai.PromptGenerationService;
 
 import lombok.RequiredArgsConstructor;
 
