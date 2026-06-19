@@ -1,7 +1,6 @@
 package com.ssafy.wp.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.quizroom.QuizRoom;
 import com.ssafy.wp.model.dto.quizroom.QuizRoomCreateRequest;
 import com.ssafy.wp.model.dto.quizroom.QuizRoomDetailResponse;
@@ -47,10 +47,9 @@ public class QuizRoomController {
 		// 그래서 그 목록 중 어떤 퀴즈룸을 클릭하면 위의 select로 퀴즈룸 내의 퀴즈까지 쭉 조회해보는 형식으로 구성
 		List<QuizRoom> quizRoomList = qrService.selectAllByUserId(userId);
 
-		return ResponseEntity.ok(Map.of(
-				"message", "교사 퀴즈룸 전체 조회 성공",
-				"data", quizRoomList
-		));
+		return ResponseEntity.ok(
+		        ApiResponse.ok("교사 퀴즈룸 전체 조회 성공", quizRoomList)
+		);
 	}
 	
 	@Operation(
@@ -64,13 +63,13 @@ public class QuizRoomController {
 		QuizRoomDetailResponse quizRoom = qrService.select(id);
 		
 		if (quizRoom != null) {
-			return ResponseEntity.ok(Map.of(
-						"message","퀴즈룸 조회 성공",
-						"data", quizRoom)
-					);
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("퀴즈룸 조회 성공", quizRoom)
+		    );
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).
-					body(Map.of("message", "해당 퀴즈룸 찾을 수 없음"));
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+		            ApiResponse.fail("해당 퀴즈룸 찾을 수 없음")
+		    );
 		}
 	}
 	
@@ -84,23 +83,24 @@ public class QuizRoomController {
 
 		String errorMessage = validateRequest(request);
 
-        if (errorMessage != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-                    "message", errorMessage
-            ));
-        }
+		if (errorMessage != null) {
+		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+		            ApiResponse.fail(errorMessage)
+		    );
+		}
 
 		int userId = userDetails.getId();
 		int result = qrService.insert(userId, request);
 		
 		if (result > 0) {
-			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
-					"message", "퀴즈룸 생성 성공"
-			));
+		    return ResponseEntity.status(HttpStatus.CREATED).body(
+		            ApiResponse.ok("퀴즈룸 생성 성공")
+		    );
 		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-				"message", "잘못된 입력"
-		));
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+		        ApiResponse.fail("잘못된 입력")
+		);
 	}
 	
 	@Operation(
@@ -115,23 +115,24 @@ public class QuizRoomController {
 
 		String errorMessage = validateRequest(request);
 
-        if (errorMessage != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-                    "message", errorMessage
-            ));
-        }
+		if (errorMessage != null) {
+		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+		            ApiResponse.fail(errorMessage)
+		    );
+		}
         
 		int userId = userDetails.getId();
 		int result = qrService.update(id, userId, request);
 		
 		if (result > 0) {
-			return ResponseEntity.ok(Map.of(
-					"message", "퀴즈룸 수정 성공"
-			));
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("퀴즈룸 수정 성공")
+		    );
 		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
-				"message", "찾을 수 없음"
-		));
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+		        ApiResponse.fail("찾을 수 없음")
+		);
 	}
 	
 	@Operation(
@@ -147,14 +148,14 @@ public class QuizRoomController {
 		int result = qrService.delete(id, userId);
 
 		if (result > 0) {
-			return ResponseEntity.ok(Map.of(
-					"message", "퀴즈룸 삭제 성공"
-			));
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("퀴즈룸 삭제 성공")
+		    );
 		}
 
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
-				"message", "퀴즈룸을 찾을 수 없거나 삭제 권한이 없습니다."
-		));
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+		        ApiResponse.fail("퀴즈룸을 찾을 수 없거나 삭제 권한이 없습니다.")
+		);
 	}
 	
 	private String validateRequest(QuizRoomCreateRequest request) {
