@@ -1,7 +1,6 @@
 package com.ssafy.wp.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.quiz.Quiz;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.QuizService;
@@ -33,49 +33,47 @@ public class QuizController {
 		Quiz quiz = qService.select(id);
 		
 		if (quiz != null) {
-			return ResponseEntity.ok(Map.of(
-					"message", "퀴즈 조회 성공",
-					"data", quiz)
-					);
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("퀴즈 조회 성공", quiz)
+		    );
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
-					"message","찾을 수 없음"));
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+		            ApiResponse.fail("찾을 수 없음")
+		    );
 		}
 	}
 	
 	@GetMapping
 	public ResponseEntity<?> selectAll(@AuthenticationPrincipal CustomUserDetails userDetails){
 		
-		// 나중에 JWT 배우고 나서 교체 예정
 		int userId = userDetails.getId();
 		List<Quiz> qList = qService.selectAll(userId);
 		
 		if (qList != null) {
-			return ResponseEntity.ok(Map.of(
-					"message", "퀴즈 전체 조회 성공",
-					"data",qList)
-					);
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("퀴즈 전체 조회 성공", qList)
+		    );
 		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-					"message", "잘못된 요청")
-					);
+		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+		            ApiResponse.fail("잘못된 요청")
+		    );
 		}
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> insert(@RequestBody Quiz quiz){
-	    System.out.println("userId = " + quiz.getUserId());
+
 		int result = qService.insert(quiz);
 		
 		if (result > 0) {
-			Quiz findQuiz = qService.select(quiz.getId());
-			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
-					"message", "퀴즈 생성 성공",
-					"data", result));
+		    Quiz findQuiz = qService.select(quiz.getId());
+		    return ResponseEntity.status(HttpStatus.CREATED).body(
+		            ApiResponse.ok("퀴즈 생성 성공", findQuiz)
+		    );
 		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
-					"message", "잘못된 요청")
-					);
+		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+		            ApiResponse.fail("잘못된 요청")
+		    );
 		}
 	}
 	
@@ -86,14 +84,14 @@ public class QuizController {
 		int result = qService.update(id, title);
 		
 		if (result > 0) {
-			Quiz findQuiz = qService.select(id);
-			return ResponseEntity.ok(Map.of(
-					"message","퀴즈 수정 성공",
-					"data", findQuiz)
-					);
+		    Quiz findQuiz = qService.select(id);
+		    return ResponseEntity.ok(
+		            ApiResponse.ok("퀴즈 수정 성공", findQuiz)
+		    );
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
-					"message","찾을 수 없음"));
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+		            ApiResponse.fail("찾을 수 없음")
+		    );
 		}
 	}
 	
@@ -103,11 +101,13 @@ public class QuizController {
 		int result = qService.delete(id);
 		
 		if (result > 0) {
-			return ResponseEntity.status(HttpStatus.OK).body(Map.of(
-					"message", "퀴즈 삭제 성공"));
+		    return ResponseEntity.status(HttpStatus.OK).body(
+		            ApiResponse.ok("퀴즈 삭제 성공")
+		    );
 		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
-					"message","찾을 수 없음"));
+		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+		            ApiResponse.fail("찾을 수 없음")
+		    );
 		}
 	}
 }
