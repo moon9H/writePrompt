@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.auth.LoginRequest;
 import com.ssafy.wp.model.dto.member.Member;
 import com.ssafy.wp.security.dto.CustomUserDetails;
@@ -44,9 +45,8 @@ public class AuthController {
 
         String accessToken = jwtUtil.createAccessToken(member);
 
-        return ResponseEntity.ok(Map.of(
-                "message", "로그인 성공",
-                "data", Map.of(
+        return ResponseEntity.ok(
+                ApiResponse.ok("로그인 성공", Map.of(
                         "accessToken", accessToken,
                         "member", Map.of(
                                 "id", member.getId(),
@@ -54,7 +54,7 @@ public class AuthController {
                                 "nickname", member.getNickname(),
                                 "role", member.getRole()
                         )
-                )
-        ));
+                ))
+        );
     }
 }
