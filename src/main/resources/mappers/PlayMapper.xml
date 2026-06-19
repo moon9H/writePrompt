@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.wp.model.dao.PlayDao">
+
+	<select id="selectAll" resultType="QuizRoom">
+		SELECT id,
+			   user_id,
+			   title,
+			   created_time,
+			   room_code,
+			   state,
+			   level,
+			   description,
+			   solved_cnt,
+			   `like`
+		FROM QuizRoom
+		WHERE state = 'OPEN'
+		ORDER BY created_time DESC
+	</select>
+	
+	<select id="searchByTitle" resultType="QuizRoom">
+		SELECT id,
+			   user_id,
+			   title,
+			   created_time,
+			   room_code,
+			   state,
+			   level,
+			   description,
+			   solved_cnt,
+			   `like`
+		FROM QuizRoom
+		WHERE state = 'OPEN'
+		  AND title LIKE CONCAT('%', #{title}, '%')
+		ORDER BY created_time DESC
+	</select>
+	
+	<update id="increaseLike">
+		UPDATE QuizRoom
+		SET `like` = `like` + 1
+		WHERE id = #{id}
+	</update>
+	
+	<select id="selectDetail" resultType="QuizRoomDetailResponse">
+		SELECT id,
+			   user_id,
+			   title,
+			   created_time,
+			   room_code,
+			   state,
+			   level,
+			   description,
+			   solved_cnt,
+			   `like`
+		FROM QuizRoom
+		WHERE id = #{id}
+		  AND state = 'OPEN'
+	</select>
+	
+	<select id="selectQuizList" resultType="QuizInRoomDTO">
+		SELECT q.id AS quiz_id,
+			   q.title,
+			   q.image,
+			   q.level,
+			   qqr.quiz_order
+		FROM Quiz_QuizRoom qqr
+		JOIN Quiz q
+		  ON qqr.quiz_id = q.id
+		WHERE qqr.quiz_room_id = #{quizRoomId}
+		ORDER BY qqr.quiz_order
+	</select>
+	
+	<insert id="insertResult" parameterType="QuizResult">
+		INSERT INTO QuizResult
+			(user_id, quiz_room_id, score, feedback)
+		VALUES
+			(#{userId}, #{quizRoomId}, #{score}, #{feedback})
+	</insert>
+	
+	<update id="increaseSolvedCnt">
+		UPDATE QuizRoom
+		SET solved_cnt = solved_cnt + 1
+		WHERE id = #{quizRoomId}
+			AND state = 'OPEN'
+	</update>
+
+</mapper>

@@ -21,6 +21,9 @@ public class AiConfig {
 	@Value("classpath:/prompts/image_compare_system_prompt.txt")
 	private Resource imageCompareSystemPrompt;
 	
+	@Value("classpath:/prompts/final_feedback_system_prompt.txt")
+	private Resource finalFeedbackSystemPrompt;
+	
 	@Bean
     RestClient.Builder restClientBuilder() {
         // SSAFY GMS 특징: streaming 방식의 transfer-encoding: chunked 비활성화로 인해 buffering 필요(length 속성이 필요하기 때문?)
@@ -41,5 +44,12 @@ public class AiConfig {
     	return ChatClient.builder(openAiChatModel)
                 .defaultSystem(imageCompareSystemPrompt)
                 .build(); 
+    }
+    
+    @Bean("finalFeedbackChatClient")
+    ChatClient finalFeedbackChatClient(OpenAiChatModel openAiChatModel) {
+    	return ChatClient.builder(openAiChatModel)
+    				.defaultSystem(finalFeedbackSystemPrompt)
+    				.build();
     }
 }
