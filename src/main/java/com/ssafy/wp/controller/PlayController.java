@@ -5,16 +5,20 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.wp.model.dto.PlayAnswerRequest;
+import com.ssafy.wp.model.dto.PlayAnswerResponse;
 import com.ssafy.wp.model.dto.QuizRoom;
 import com.ssafy.wp.model.dto.QuizRoomDetailResponse;
-import com.ssafy.wp.service.ImageCompareService;
+import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.PlayService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class PlayController {
 	
 	private final PlayService playService;
-	private final ImageCompareService icService;
+
 	
 	@Operation(
 		summary = "플레이 가능한 퀴즈룸 전체 조회",
@@ -64,10 +68,10 @@ public class PlayController {
 		summary = "퀴즈룸 좋아요 등록",
 		description = "퀴즈룸 좋아요 수 +1"
 	)
-	@PostMapping("/like/{id}")
-	public ResponseEntity<?> increaseLike(@PathVariable int id){
+	@PostMapping("/like/{quizroomid}")
+	public ResponseEntity<?> increaseLike(@PathVariable("quizroomid") int quizRoomId){
 		
-		int result = playService.increaseLike(id);
+		int result = playService.increaseLike(quizRoomId);
 		
 		if (result > 0) {
 			return ResponseEntity.ok(Map.of(
@@ -82,10 +86,10 @@ public class PlayController {
 		summary = "퀴즈룸 입장",
 		description = "유저가 OPEN 상태의 퀴즈룸에 입장하고 퀴즈 목록을 조회"
 	)
-	@GetMapping("/{id}")
-	public ResponseEntity<?> selectDetail(@PathVariable("id") int id) {
+	@GetMapping("/{quizroomid}")
+	public ResponseEntity<?> selectDetail(@PathVariable("quizroomid") int quizRoomId) {
 		
-		QuizRoomDetailResponse quizRoom = playService.selectDetail(id);
+		QuizRoomDetailResponse quizRoom = playService.selectDetail(quizRoomId);
 		
 		if (quizRoom == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -94,6 +98,42 @@ public class PlayController {
 			return ResponseEntity.ok(Map.of(
 									"message", "퀴즈룸 입장 성공",
 									"data", quizRoom));
+		}
+	}
+	
+	@Operation(
+		summary = "최종 제출",
+		description = "문제별 결과를 바탕으로 평균 점수와 AI 최종 피드백을 생성하고 결과를 저장"
+	)
+	@PostMapping("/answer/{quizroomid}")
+	public ResponseEntity<?> submitFinalAnswer(@PathVariable("quizroomid") int quizRoomId,
+												@RequestBody PlayAnswerRequest request,
+												@AuthenticationPrincipal CustomUserDetails userDetails) {
+		try {
+			int userId = userDetails.getId();
+			
+			PlayAnswerResponse aiResponse = playService.submitFinalAnswer(request);
+			
+			int result = playService.insertResult(userId, quizRoomId, aiResponse);
+			
+			if (result > 0) {
+				return ResponseEntity.ok(Map.of(
+						"message", "채점 성공",
+						"data", aiResponse
+				));
+			} else {
+				return ResponseEntity.badRequest().body(Map.of(
+						"message", "최종 결과 저장 실패"
+				));
+			}
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.badRequest().body(Map.of(
+					"message", "최종 채점 실패: " + e.getMessage()
+			));
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().body(Map.of(
+					"message", "최종 채점 실패: " + e.getMessage()
+			));
 		}
 	}
 }

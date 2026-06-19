@@ -71,5 +71,19 @@
 		WHERE qqr.quiz_room_id = #{quizRoomId}
 		ORDER BY qqr.quiz_order
 	</select>
+	
+	<insert id="insertResult" parameterType="QuizResult">
+		INSERT INTO QuizResult
+			(user_id, quiz_room_id, score, feedback)
+		VALUES
+			(#{userId}, #{quizRoomId}, #{score}, #{feedback})
+	</insert>
+	
+	<update id="increaseSolvedCnt">
+		UPDATE QuizRoom
+		SET solved_cnt = solved_cnt + 1
+		WHERE id = #{quizRoomId}
+			AND state = 'OPEN'
+	</update>
 
 </mapper>
