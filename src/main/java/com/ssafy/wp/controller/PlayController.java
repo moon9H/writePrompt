@@ -112,23 +112,12 @@ public class PlayController {
 	public ResponseEntity<?> submitFinalAnswer(@PathVariable("quizroomid") int quizRoomId,
 												@RequestBody PlayAnswerRequest request,
 												@AuthenticationPrincipal CustomUserDetails userDetails) {
-		try {
-			int userId = userDetails.getId();
-						
-			PlayAnswerResponse response = playService.submitFinalAnswer(userId, quizRoomId, request);
-			
-			return ResponseEntity.ok(
-			        ApiResponse.ok("채점 성공", response)
-			);
-			
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body(
-			        ApiResponse.fail("최종 채점 실패: " + e.getMessage())
-			);
-		} catch (Exception e) {
-			return ResponseEntity.internalServerError().body(
-			        ApiResponse.fail("최종 채점 실패: " + e.getMessage())
-			);
-		}
+		int userId = userDetails.getId();
+		
+		PlayAnswerResponse response = playService.submitFinalAnswer(userId, quizRoomId, request);
+		
+		return ResponseEntity.ok(
+		        ApiResponse.ok("채점 성공", response)
+		);
 	}
 }

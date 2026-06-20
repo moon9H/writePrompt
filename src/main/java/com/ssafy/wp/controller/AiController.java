@@ -30,87 +30,46 @@ public class AiController {
 	private final ImageCompareService icService;
 	
 	@PostMapping("/compare")
-	public ResponseEntity<?> compareImages(
-			@RequestBody ImageCompareRequest request){
-		if (request == null
-				|| isBlank(request.getAnswerImageUrl())
-				|| isBlank(request.getStudentImageUrl())) {
-			return ResponseEntity.badRequest().body(
-			        ApiResponse.fail("잘못된 입력")
-			);
-		}
-		
-		try {
-			ImageCompareResult result = icService.compareImages(request);
-			
-			return ResponseEntity.ok(
-			        ApiResponse.ok("이미지 비교 성공", result)
-			);
-		} catch (IllegalStateException e) {
-			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(
-			        ApiResponse.fail("이미지 비교 실패")
-			);
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body(
-			        ApiResponse.fail("잘못된 입력")
-			);
+	public ResponseEntity<?> compareImages(@RequestBody ImageCompareRequest request){
+	    if (request == null
+	            || isBlank(request.getAnswerImageUrl())
+	            || isBlank(request.getStudentImageUrl())) {
+	        throw new IllegalArgumentException("잘못된 입력");
+	    }
 
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(
-			        ApiResponse.fail("이미지 비교 실패")
-			);
-		}
+	    ImageCompareResult result = icService.compareImages(request);
+
+	    return ResponseEntity.ok(
+	            ApiResponse.ok("이미지 비교 성공", result)
+	    );
 	}
 	
 	@PostMapping("/image")
-	public ResponseEntity<?> generateImage(
-	        @RequestBody ImageGenerateRequest request) {
+	public ResponseEntity<?> generateImage(@RequestBody ImageGenerateRequest request) throws IOException {
 	    
-		if (request == null || isBlank(request.getPrompt())) {
-			return ResponseEntity.badRequest().body(
-			        ApiResponse.fail("잘못된 입력")
-			);
+	    if (request == null || isBlank(request.getPrompt())) {
+	        throw new IllegalArgumentException("잘못된 입력");
 	    }
 
-	    try {
-	        String image = igService.generateImage(request.getPrompt());
-	        
-	        return ResponseEntity.ok(
-	                ApiResponse.ok("이미지 생성 성공", image)
-	        );
-	    } catch (IllegalStateException e) {
-	    	return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(
-	    	        ApiResponse.fail("이미지 생성 실패")
-	    	);
+	    String image = igService.generateImage(request.getPrompt());
 
-	    } catch (IOException e) {
-	    	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-	    	        ApiResponse.fail("이미지 저장 실패")
-	    	);
-	    }
+	    return ResponseEntity.ok(
+	            ApiResponse.ok("이미지 생성 성공", image)
+	    );
 	}
 	
 	@PostMapping("/prompt")
-	public ResponseEntity<?> generatePrompt(
-				@RequestBody PromptGenerateRequest request){
-		
-		if (isInvalidPromptRequest(request)) {
-			return ResponseEntity.badRequest().body(
-			        ApiResponse.fail("잘못된 입력")
-			);
-        }
-		
-		try {
-			String prompt = pgService.generatePrompt(request);
-			
-			return ResponseEntity.ok(
-			        ApiResponse.ok("프롬프트 생성 성공", prompt)
-			);
-		} catch (IllegalStateException e) {
-			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(
-			        ApiResponse.fail("프롬프트 생성 실패")
-			);
-        }
+	public ResponseEntity<?> generatePrompt(@RequestBody PromptGenerateRequest request){
+	    
+	    if (isInvalidPromptRequest(request)) {
+	        throw new IllegalArgumentException("잘못된 입력");
+	    }
+
+	    String prompt = pgService.generatePrompt(request);
+
+	    return ResponseEntity.ok(
+	            ApiResponse.ok("프롬프트 생성 성공", prompt)
+	    );
 	}
 	
 	private boolean isInvalidPromptRequest(PromptGenerateRequest request) {
