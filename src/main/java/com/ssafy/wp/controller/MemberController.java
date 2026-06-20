@@ -17,8 +17,11 @@ import com.ssafy.wp.model.dto.member.Member;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.MemberService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Member", description = "회원 관리 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/members")
@@ -26,6 +29,10 @@ public class MemberController {
 	
 	private final MemberService mService;
 	
+	@Operation(
+	    summary = "회원 조회",
+	    description = "회원 id를 기준으로 회원 정보 조회"
+	)
 	@GetMapping("/{id}")
 	public ResponseEntity<?> select(@PathVariable("id") int id){
 		Member member = mService.select(id);
@@ -41,6 +48,10 @@ public class MemberController {
 		}
 	}
 	
+	@Operation(
+        summary = "회원가입",
+        description = "사용자 정보를 입력받아 신규 회원 등록"
+	)
 	@PostMapping
 	public ResponseEntity<?> insert(@RequestBody Member member){
 		
@@ -58,6 +69,10 @@ public class MemberController {
 		}
 	}
 	
+	@Operation(
+        summary = "회원 정보 수정",
+        description = "JWT 토큰에서 사용자 id를 꺼내 로그인한 회원 정보 수정"
+	)
 	@PatchMapping
 	public ResponseEntity<?> update(@AuthenticationPrincipal CustomUserDetails userDetails,
 	                                @RequestBody Member member){
@@ -79,6 +94,10 @@ public class MemberController {
 		}
 	}
 	
+	@Operation(
+        summary = "회원 탈퇴",
+        description = "회원 id를 기준으로 회원 정보 삭제"
+	)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") int id){
 		
