@@ -18,8 +18,11 @@ import com.ssafy.wp.service.ai.ImageCompareService;
 import com.ssafy.wp.service.ai.ImageGenerationService;
 import com.ssafy.wp.service.ai.PromptGenerationService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "AI", description = "AI 이미지 생성, 프롬프트 생성, 이미지 비교 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/ai")
@@ -29,6 +32,10 @@ public class AiController {
 	private final PromptGenerationService pgService;
 	private final ImageCompareService icService;
 	
+	@Operation(
+        summary = "이미지 비교",
+        description = "정답 이미지와 사용자가 제출한 이미지를 비교하여 점수와 피드백 생성"
+	)
 	@PostMapping("/compare")
 	public ResponseEntity<?> compareImages(@RequestBody ImageCompareRequest request){
 	    if (request == null
@@ -44,6 +51,10 @@ public class AiController {
 	    );
 	}
 	
+	@Operation(
+        summary = "이미지 생성",
+        description = "사용자가 입력한 프롬프트를 기반으로 이미지를 생성"
+	)
 	@PostMapping("/image")
 	public ResponseEntity<?> generateImage(@RequestBody ImageGenerateRequest request) throws IOException {
 	    
@@ -58,6 +69,10 @@ public class AiController {
 	    );
 	}
 	
+	@Operation(
+        summary = "프롬프트 생성",
+        description = "퀴즈 생성에 필요한 조건을 바탕으로 이미지 생성용 프롬프트를 생성"
+	)
 	@PostMapping("/prompt")
 	public ResponseEntity<?> generatePrompt(@RequestBody PromptGenerateRequest request){
 	    
