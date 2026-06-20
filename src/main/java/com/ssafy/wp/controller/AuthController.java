@@ -17,9 +17,12 @@ import com.ssafy.wp.model.dto.member.Member;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.security.jwt.JWTUtil;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Auth", description = "인증 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
@@ -27,7 +30,11 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
-
+    
+    @Operation(
+        summary = "로그인",
+        description = "이메일과 비밀번호로 로그인하고 JWT Access Token 발급"
+    )
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
 
