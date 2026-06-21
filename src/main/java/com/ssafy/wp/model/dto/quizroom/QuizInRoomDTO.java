@@ -10,7 +10,5 @@ import lombok.Setter;
 public class QuizInRoomDTO {
 	private int quizId;
 	private int quizOrder;
-	private String title;
-	private String image;
-	private String level;
+
 }
