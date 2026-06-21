@@ -104,10 +104,6 @@ public class QuizRoomServiceImpl implements QuizRoomService {
 	@Transactional
 	public int delete(int id, int userId) {
 		
-		// 1. 연결 테이블 삭제
-		qrDao.deleteQuizListByRoomId(id, userId);
-		
-		// 2. 퀴즈룸 삭제
 		return qrDao.delete(id, userId);
 	}
 }
