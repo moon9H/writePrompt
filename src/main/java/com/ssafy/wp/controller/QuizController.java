@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.quiz.Quiz;
 import com.ssafy.wp.model.dto.quiz.QuizCreateRequest;
+import com.ssafy.wp.model.dto.quiz.QuizResponse;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.QuizService;
 
@@ -43,7 +44,7 @@ public class QuizController {
 		
 		if (quiz != null) {
 		    return ResponseEntity.ok(
-		            ApiResponse.ok("퀴즈 조회 성공", quiz)
+		    		ApiResponse.ok("퀴즈 조회 성공", QuizResponse.from(quiz))
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
@@ -63,8 +64,11 @@ public class QuizController {
 		List<Quiz> qList = qService.selectAll(userId);
 		
 		if (qList != null) {
+			List<QuizResponse> response = qList.stream()
+			        .map(QuizResponse::from)
+			        .toList();
 		    return ResponseEntity.ok(
-		            ApiResponse.ok("퀴즈 전체 조회 성공", qList)
+		            ApiResponse.ok("퀴즈 전체 조회 성공", response)
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -86,7 +90,7 @@ public class QuizController {
 		
 		if (quiz != null) {
 		    return ResponseEntity.status(HttpStatus.CREATED).body(
-		            ApiResponse.ok("퀴즈 생성 성공", quiz)
+		            ApiResponse.ok("퀴즈 생성 성공", QuizResponse.from(quiz))
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -110,7 +114,7 @@ public class QuizController {
 		if (result > 0) {
 		    Quiz findQuiz = qService.select(id);
 		    return ResponseEntity.ok(
-		            ApiResponse.ok("퀴즈 수정 성공", findQuiz)
+		            ApiResponse.ok("퀴즈 수정 성공", QuizResponse.from(findQuiz))
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
