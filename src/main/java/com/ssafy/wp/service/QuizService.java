@@ -10,7 +10,7 @@ public interface QuizService {
 	int insert(Quiz quiz);
 	
 	// 퀴즈 삭제
-	int delete(int id);
+	int delete(int id, int userId);
 	
 	// 퀴즈 제목 수정
 	int update(int id, String title);

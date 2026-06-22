@@ -37,5 +37,7 @@
 		DELETE FROM quiz
 		WHERE
 			id = #{id}
+		AND
+			user_id = #{userId}
 	</delete>
 </mapper>

@@ -21,8 +21,8 @@ public class QuizServiceImpl implements QuizService{
 	}
 
 	@Override
-	public int delete(int id) {
-		return qDao.delete(id);
+	public int delete(int id, int userId) {
+		return qDao.delete(id, userId);
 	}
 
 	@Override

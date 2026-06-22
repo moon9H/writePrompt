@@ -3,6 +3,7 @@ package com.ssafy.wp.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.wp.model.dto.quiz.Quiz;
 
@@ -13,7 +14,8 @@ public interface QuizDao {
 	int insert(Quiz quiz);
 	
 	// 퀴즈 삭제
-	int delete(int id);
+	int delete(@Param("id") int id,
+			@Param("userId") int userId);
 	
 	// 퀴즈 수정
 	int update(int id, String title);

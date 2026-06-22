@@ -20,6 +20,7 @@ import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.QuizService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -119,9 +120,12 @@ public class QuizController {
         description = "퀴즈 id를 기준으로 생성된 퀴즈 삭제"
 	)
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") int id){
+	public ResponseEntity<?> delete(@AuthenticationPrincipal CustomUserDetails userDetails,
+									@Parameter(description = "삭제할 퀴즈룸 id", example = "1")
+									@PathVariable("id") int id){
 		
-		int result = qService.delete(id);
+		int userId = userDetails.getId();
+		int result = qService.delete(id, userId);
 		
 		if (result > 0) {
 		    return ResponseEntity.status(HttpStatus.OK).body(
