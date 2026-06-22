@@ -76,7 +76,7 @@ public class MemberController {
         summary = "회원 정보 수정",
         description = "JWT 토큰에서 사용자 id를 꺼내 로그인한 회원 정보 수정"
 	)
-	@PatchMapping
+	@PatchMapping("/me")
 	public ResponseEntity<?> update(@AuthenticationPrincipal CustomUserDetails userDetails,
 	                                @RequestBody MemberRequest request){
 		
