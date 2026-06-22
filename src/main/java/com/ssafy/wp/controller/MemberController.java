@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.member.Member;
+import com.ssafy.wp.model.dto.member.MemberDetailResponse;
+import com.ssafy.wp.model.dto.member.MemberRequest;
+import com.ssafy.wp.model.dto.member.MemberResponse;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.MemberService;
 
@@ -35,7 +38,7 @@ public class MemberController {
 	)
 	@GetMapping("/{id}")
 	public ResponseEntity<?> select(@PathVariable("id") int id){
-		Member member = mService.select(id);
+		MemberDetailResponse member = mService.selectDetail(id);
 		
 		if (member != null) {
 		    return ResponseEntity.ok(
@@ -53,14 +56,13 @@ public class MemberController {
         description = "사용자 정보를 입력받아 신규 회원 등록"
 	)
 	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody Member member){
+	public ResponseEntity<?> insert(@RequestBody MemberRequest request){
 		
-		int result = mService.insert(member);
+		Member member = mService.insert(request);
 		
-		if (result > 0) {
-		    Member findMember = mService.select(member.getId());
+		if (member != null) {
 		    return ResponseEntity.status(HttpStatus.CREATED).body(
-		            ApiResponse.ok("회원가입 성공", findMember)
+		            ApiResponse.ok("회원가입 성공", MemberResponse.from(member))
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -75,17 +77,14 @@ public class MemberController {
 	)
 	@PatchMapping
 	public ResponseEntity<?> update(@AuthenticationPrincipal CustomUserDetails userDetails,
-	                                @RequestBody Member member){
+	                                @RequestBody MemberRequest request){
 		
 		int memberId = userDetails.getId();
-		member.setId(memberId);
+		Member updatedMember = mService.update(memberId, request);
 		
-		int result = mService.update(member);
-		
-		if (result > 0) {
-		    Member updatedMember = mService.select(member.getId());
+		if (updatedMember != null) {
 		    return ResponseEntity.ok(
-		            ApiResponse.ok("회원 정보 수정 성공", updatedMember)
+		            ApiResponse.ok("회원 정보 수정 성공", MemberResponse.from(updatedMember))
 		    );
 		} else {
 		    return ResponseEntity.badRequest().body(
@@ -99,7 +98,14 @@ public class MemberController {
         description = "회원 id를 기준으로 회원 정보 삭제"
 	)
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") int id){
+	public ResponseEntity<?> delete(@AuthenticationPrincipal CustomUserDetails userDetails,
+									@PathVariable("id") int id){
+		
+		if (id != userDetails.getId()) {
+	        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+	                ApiResponse.fail("삭제 권한이 없습니다.")
+	        );
+	    }
 		
 		int result = mService.delete(id);
 		

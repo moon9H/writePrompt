@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.wp.model.dao.QuizDao;
 import com.ssafy.wp.model.dto.quiz.Quiz;
+import com.ssafy.wp.model.dto.quiz.QuizCreateRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,18 +17,31 @@ public class QuizServiceImpl implements QuizService{
 	private final QuizDao qDao;
 
 	@Override
-	public int insert(Quiz quiz) {
-		return qDao.insert(quiz);
+	public Quiz insert(int userId, QuizCreateRequest request) {
+		Quiz quiz = new Quiz();
+
+	    quiz.setUserId(userId);
+	    quiz.setTitle(request.getTitle());
+	    quiz.setImage(request.getImage());
+	    quiz.setLevel(request.getLevel());
+	    
+	    int result = qDao.insert(quiz);
+
+	    if (result <= 0) {
+	        return null;
+	    }
+
+	    return qDao.select(quiz.getId());
 	}
 
 	@Override
-	public int delete(int id) {
-		return qDao.delete(id);
+	public int delete(int id, int userId) {
+		return qDao.delete(id, userId);
 	}
 
 	@Override
-	public int update(int id, String title) {
-		return qDao.update(id, title);
+	public int update(int id, int userId, String title) {
+		return qDao.update(id, userId, title);
 	}
 
 	@Override

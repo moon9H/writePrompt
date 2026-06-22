@@ -16,7 +16,7 @@
 		WHERE user_id = #{userId}
 	</select>
 	
-	<insert id="insert" parameterType="Quiz">
+	<insert id="insert" parameterType="Quiz" useGeneratedKeys="true" keyProperty="id">>
 		INSERT INTO quiz
 			(user_id, title, image, level)
 		VALUES
@@ -30,12 +30,18 @@
 				title = #{title},
 			</if>
 		</set>
-		WHERE id = #{id}
+		WHERE 
+			id = #{id}
+		AND 
+			user_id = #{userId}
+		
 	</update>
 	
 	<delete id="delete">
 		DELETE FROM quiz
 		WHERE
 			id = #{id}
+		AND
+			user_id = #{userId}
 	</delete>
 </mapper>

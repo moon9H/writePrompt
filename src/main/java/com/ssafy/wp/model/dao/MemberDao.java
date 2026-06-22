@@ -1,8 +1,12 @@
 package com.ssafy.wp.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.wp.model.dto.member.Member;
+import com.ssafy.wp.model.dto.play.QuizResult;
+
 @Mapper
 public interface MemberDao {
 	
@@ -19,4 +23,6 @@ public interface MemberDao {
 	int delete(int id);
 
 	Member selectByEmail(String email);
+
+	List<QuizResult> selectQuizResultsByUserId(int userId);
 }

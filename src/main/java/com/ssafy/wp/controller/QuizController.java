@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.quiz.Quiz;
+import com.ssafy.wp.model.dto.quiz.QuizCreateRequest;
+import com.ssafy.wp.model.dto.quiz.QuizResponse;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.QuizService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -41,7 +44,7 @@ public class QuizController {
 		
 		if (quiz != null) {
 		    return ResponseEntity.ok(
-		            ApiResponse.ok("퀴즈 조회 성공", quiz)
+		    		ApiResponse.ok("퀴즈 조회 성공", QuizResponse.from(quiz))
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
@@ -61,8 +64,11 @@ public class QuizController {
 		List<Quiz> qList = qService.selectAll(userId);
 		
 		if (qList != null) {
+			List<QuizResponse> response = qList.stream()
+			        .map(QuizResponse::from)
+			        .toList();
 		    return ResponseEntity.ok(
-		            ApiResponse.ok("퀴즈 전체 조회 성공", qList)
+		            ApiResponse.ok("퀴즈 전체 조회 성공", response)
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -76,14 +82,15 @@ public class QuizController {
         description = "교사가 새로운 퀴즈 생성"
 	)
 	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody Quiz quiz){
+	public ResponseEntity<?> insert(@AuthenticationPrincipal CustomUserDetails userDetails,
+									@RequestBody QuizCreateRequest request){
 
-		int result = qService.insert(quiz);
+	    int userId = userDetails.getId();
+		Quiz quiz = qService.insert(userId, request);
 		
-		if (result > 0) {
-		    Quiz findQuiz = qService.select(quiz.getId());
+		if (quiz != null) {
 		    return ResponseEntity.status(HttpStatus.CREATED).body(
-		            ApiResponse.ok("퀴즈 생성 성공", findQuiz)
+		            ApiResponse.ok("퀴즈 생성 성공", QuizResponse.from(quiz))
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
@@ -97,15 +104,17 @@ public class QuizController {
         description = "퀴즈 id를 기준으로 퀴즈 제목 수정"
 	)
 	@PatchMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable("id") int id, 
+	public ResponseEntity<?> update(@AuthenticationPrincipal CustomUserDetails userDetails,
+									@PathVariable("id") int id, 
 									@RequestBody String title) {
 		
-		int result = qService.update(id, title);
+		int userId = userDetails.getId();
+		int result = qService.update(id, userId, title);
 		
 		if (result > 0) {
 		    Quiz findQuiz = qService.select(id);
 		    return ResponseEntity.ok(
-		            ApiResponse.ok("퀴즈 수정 성공", findQuiz)
+		            ApiResponse.ok("퀴즈 수정 성공", QuizResponse.from(findQuiz))
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
@@ -119,9 +128,12 @@ public class QuizController {
         description = "퀴즈 id를 기준으로 생성된 퀴즈 삭제"
 	)
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") int id){
+	public ResponseEntity<?> delete(@AuthenticationPrincipal CustomUserDetails userDetails,
+									@Parameter(description = "삭제할 퀴즈룸 id", example = "1")
+									@PathVariable("id") int id){
 		
-		int result = qService.delete(id);
+		int userId = userDetails.getId();
+		int result = qService.delete(id, userId);
 		
 		if (result > 0) {
 		    return ResponseEntity.status(HttpStatus.OK).body(
