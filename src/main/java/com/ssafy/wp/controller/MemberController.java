@@ -34,10 +34,11 @@ public class MemberController {
 	
 	@Operation(
 	    summary = "회원 조회",
-	    description = "회원 id를 기준으로 회원 정보 조회"
+	    description = "JWT 토큰에서 사용자 id를 꺼내 로그인한 회원 정보 조회"
 	)
-	@GetMapping("/{id}")
-	public ResponseEntity<?> select(@PathVariable("id") int id){
+	@GetMapping("/me")
+	public ResponseEntity<?> select(@AuthenticationPrincipal CustomUserDetails userDetails){
+		int id = userDetails.getId();
 		MemberDetailResponse member = mService.selectDetail(id);
 		
 		if (member != null) {
