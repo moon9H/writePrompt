@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.member.Member;
+import com.ssafy.wp.model.dto.member.MemberDetailResponse;
 import com.ssafy.wp.model.dto.member.MemberRequest;
 import com.ssafy.wp.model.dto.member.MemberResponse;
 import com.ssafy.wp.security.dto.CustomUserDetails;
@@ -37,11 +38,11 @@ public class MemberController {
 	)
 	@GetMapping("/{id}")
 	public ResponseEntity<?> select(@PathVariable("id") int id){
-		Member member = mService.select(id);
+		MemberDetailResponse member = mService.selectDetail(id);
 		
 		if (member != null) {
 		    return ResponseEntity.ok(
-		            ApiResponse.ok("회원 정보 조회 성공", MemberResponse.from(member))
+		            ApiResponse.ok("회원 정보 조회 성공", member)
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(

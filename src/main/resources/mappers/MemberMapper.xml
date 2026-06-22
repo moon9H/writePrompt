@@ -61,4 +61,16 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="selectQuizResultsByUserId" resultType="QuizResult">
+		SELECT id,
+			   user_id,
+			   quiz_room_id,
+			   score,
+			   feedback,
+			   created_time
+		FROM QuizResult
+		WHERE user_id = #{userId}
+		ORDER BY created_time DESC
+	</select>
 </mapper>
