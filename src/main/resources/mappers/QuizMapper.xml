@@ -30,7 +30,11 @@
 				title = #{title},
 			</if>
 		</set>
-		WHERE id = #{id}
+		WHERE 
+			id = #{id}
+		AND 
+			user_id = #{userId}
+		
 	</update>
 	
 	<delete id="delete">

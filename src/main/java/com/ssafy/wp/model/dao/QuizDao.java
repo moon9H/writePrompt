@@ -18,7 +18,12 @@ public interface QuizDao {
 			@Param("userId") int userId);
 	
 	// 퀴즈 수정
-	int update(int id, String title);
+	// QuizDao
+	int update(
+	    @Param("id") int id,
+	    @Param("userId") int userId,
+	    @Param("title") String title
+	);
 	
 	// 특정 교사가 생성한 퀴즈 전체 조회
 	List<Quiz> selectAll(int userId);

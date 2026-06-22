@@ -13,7 +13,7 @@ public interface QuizService {
 	int delete(int id, int userId);
 	
 	// 퀴즈 제목 수정
-	int update(int id, String title);
+	int update(int id, int userId, String title);
 	
 	// 특정 교사가 생성한 퀴즈 전체 조회
 	List<Quiz> selectAll(int userId);

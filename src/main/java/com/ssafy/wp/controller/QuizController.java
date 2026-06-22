@@ -98,10 +98,12 @@ public class QuizController {
         description = "퀴즈 id를 기준으로 퀴즈 제목 수정"
 	)
 	@PatchMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable("id") int id, 
+	public ResponseEntity<?> update(@AuthenticationPrincipal CustomUserDetails userDetails,
+									@PathVariable("id") int id, 
 									@RequestBody String title) {
 		
-		int result = qService.update(id, title);
+		int userId = userDetails.getId();
+		int result = qService.update(id, userId, title);
 		
 		if (result > 0) {
 		    Quiz findQuiz = qService.select(id);

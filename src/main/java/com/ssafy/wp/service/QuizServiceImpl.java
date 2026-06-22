@@ -26,8 +26,8 @@ public class QuizServiceImpl implements QuizService{
 	}
 
 	@Override
-	public int update(int id, String title) {
-		return qDao.update(id, title);
+	public int update(int id, int userId, String title) {
+		return qDao.update(id, userId, title);
 	}
 
 	@Override
