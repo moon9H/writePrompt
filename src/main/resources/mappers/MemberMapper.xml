@@ -56,7 +56,7 @@
 				age, gender, profile, created_time
 		FROM user
 		<where>
-			<if test="id != null and id != ''">
+			<if test="email != null and email != ''">
 				AND email = #{email}
 			</if>
 		</where>
