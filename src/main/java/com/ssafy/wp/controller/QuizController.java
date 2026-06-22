@@ -129,7 +129,7 @@ public class QuizController {
 	)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@AuthenticationPrincipal CustomUserDetails userDetails,
-									@Parameter(description = "삭제할 퀴즈룸 id", example = "1")
+									@Parameter(description = "삭제할 퀴즈 id", example = "1")
 									@PathVariable("id") int id){
 		
 		int userId = userDetails.getId();
