@@ -9,6 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class QuizInRoomDTO {
 	private int quizId;
+	private String title;
+	private String image;
+	private String level;
 	private int quizOrder;
 
 }
