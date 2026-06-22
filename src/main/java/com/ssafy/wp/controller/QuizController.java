@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.wp.common.response.ApiResponse;
 import com.ssafy.wp.model.dto.quiz.Quiz;
+import com.ssafy.wp.model.dto.quiz.QuizCreateRequest;
 import com.ssafy.wp.security.dto.CustomUserDetails;
 import com.ssafy.wp.service.QuizService;
 
@@ -77,14 +78,15 @@ public class QuizController {
         description = "교사가 새로운 퀴즈 생성"
 	)
 	@PostMapping
-	public ResponseEntity<?> insert(@RequestBody Quiz quiz){
+	public ResponseEntity<?> insert(@AuthenticationPrincipal CustomUserDetails userDetails,
+									@RequestBody QuizCreateRequest request){
 
-		int result = qService.insert(quiz);
+	    int userId = userDetails.getId();
+		Quiz quiz = qService.insert(userId, request);
 		
-		if (result > 0) {
-		    Quiz findQuiz = qService.select(quiz.getId());
+		if (quiz != null) {
 		    return ResponseEntity.status(HttpStatus.CREATED).body(
-		            ApiResponse.ok("퀴즈 생성 성공", findQuiz)
+		            ApiResponse.ok("퀴즈 생성 성공", quiz)
 		    );
 		} else {
 		    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(

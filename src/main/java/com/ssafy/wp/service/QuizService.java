@@ -3,11 +3,12 @@ package com.ssafy.wp.service;
 import java.util.List;
 
 import com.ssafy.wp.model.dto.quiz.Quiz;
+import com.ssafy.wp.model.dto.quiz.QuizCreateRequest;
 
 public interface QuizService {
 	
 	// 새로운 퀴즈 생성
-	int insert(Quiz quiz);
+	Quiz insert(int userId, QuizCreateRequest request);
 	
 	// 퀴즈 삭제
 	int delete(int id, int userId);
