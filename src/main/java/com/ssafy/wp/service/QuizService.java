@@ -3,17 +3,18 @@ package com.ssafy.wp.service;
 import java.util.List;
 
 import com.ssafy.wp.model.dto.quiz.Quiz;
+import com.ssafy.wp.model.dto.quiz.QuizCreateRequest;
 
 public interface QuizService {
 	
 	// 새로운 퀴즈 생성
-	int insert(Quiz quiz);
+	Quiz insert(int userId, QuizCreateRequest request);
 	
 	// 퀴즈 삭제
-	int delete(int id);
+	int delete(int id, int userId);
 	
 	// 퀴즈 제목 수정
-	int update(int id, String title);
+	int update(int id, int userId, String title);
 	
 	// 특정 교사가 생성한 퀴즈 전체 조회
 	List<Quiz> selectAll(int userId);
