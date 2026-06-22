@@ -36,7 +36,7 @@ public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
     private final JWTVerificationFilter jwtVerificationFilter;
 
-    @Value("${app.cors.allowed-origin-patterns:http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://127.0.0.1:3000}")
+    @Value("${app.cors.allowed-origin-patterns:*}")
     private List<String> allowedOriginPatterns;
 
     @Bean
@@ -61,6 +61,7 @@ public class SecurityConfig {
                                 "/index.html",
                                 "/api/auth/login",
                                 "/api/members",
+                                "/uploads/images/**",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
