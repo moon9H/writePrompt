@@ -92,8 +92,8 @@ public class PlayServiceImpl implements PlayService {
 		
 		result.setUserId(userId);
 		result.setQuizRoomId(quizRoomId);
-		result.setScore(response.getAvgScore());
-		result.setFeedback(response.getFinalFeedback());
+		result.setScore(response.avgScore());
+		result.setFeedback(response.finalFeedback());
 		
 		int insertResult = playDao.insertResult(result);
 		int solvedResult = playDao.increaseSolvedCnt(quizRoomId);
