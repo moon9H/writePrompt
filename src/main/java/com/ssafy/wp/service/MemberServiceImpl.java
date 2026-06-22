@@ -1,12 +1,16 @@
 package com.ssafy.wp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.wp.model.dao.MemberDao;
 import com.ssafy.wp.model.dto.member.Member;
+import com.ssafy.wp.model.dto.member.MemberDetailResponse;
 import com.ssafy.wp.model.dto.member.MemberRequest;
+import com.ssafy.wp.model.dto.play.QuizResultResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +25,31 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member select(int id) {
 		return mDao.select(id);
+	}
+
+	@Override
+	public MemberDetailResponse selectDetail(int id) {
+		Member member = mDao.select(id);
+
+		if (member == null) {
+			return null;
+		}
+
+		List<QuizResultResponse> quizResults = mDao.selectQuizResultsByUserId(id).stream()
+				.map(QuizResultResponse::from)
+				.toList();
+
+		int solvedCount = quizResults.size();
+		double averageScore = quizResults.stream()
+				.mapToDouble(QuizResultResponse::score)
+				.average()
+				.orElse(0.0);
+		double highestScore = quizResults.stream()
+				.mapToDouble(QuizResultResponse::score)
+				.max()
+				.orElse(0.0);
+
+		return MemberDetailResponse.from(member, quizResults, averageScore, solvedCount, highestScore);
 	}
 
 	@Override
