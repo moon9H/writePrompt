@@ -65,7 +65,9 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/error"
+                                "/error",
+                                "/api/auth/refresh",
+                                "/api/auth/logout"
                         ).permitAll()
 
                         .requestMatchers("/api/quiz/**","/api/quizroom/**").hasRole("TEACHER")

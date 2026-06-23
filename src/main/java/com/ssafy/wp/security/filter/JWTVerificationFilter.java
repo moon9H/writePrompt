@@ -51,11 +51,14 @@ public class JWTVerificationFilter extends OncePerRequestFilter {
 		return HttpMethod.OPTIONS.matches(method)
 				|| (HttpMethod.POST.matches(method) && isSamePath(path, "/api/auth/login"))
 				|| (HttpMethod.POST.matches(method) && isSamePath(path, "/api/members"))
+				|| (HttpMethod.POST.matches(method) && isSamePath(path, "/api/auth/refresh"))
+				|| (HttpMethod.POST.matches(method) && isSamePath(path, "/api/auth/logout"))
 				|| "/".equals(path)
 				|| "/index.html".equals(path)
 				|| "/error".equals(path)
 				|| path.startsWith("/swagger-ui")
 				|| path.startsWith("/v3/api-docs");
+		
 	}
 
 	private boolean isSamePath(String actualPath, String expectedPath) {
