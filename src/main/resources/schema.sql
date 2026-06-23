@@ -14,6 +14,7 @@ CREATE TABLE User (
     email VARCHAR(128) NOT NULL UNIQUE,
     password VARCHAR(128) NOT NULL,
     role VARCHAR(128) NOT NULL,
+    refresh_token TEXT,
     nickname VARCHAR(128) NOT NULL,
     age DATE NOT NULL,
     gender VARCHAR(128) NOT NULL,
