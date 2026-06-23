@@ -22,4 +22,5 @@ public class Member {
 	private String gender;
 	private String profile;
 	private LocalDateTime createdTime;
+	private String  refreshToken;
 }

@@ -110,4 +110,14 @@ public class MemberServiceImpl implements MemberService {
 
 		return normalizedRole;
 	}
+	
+	@Override
+	public int updateRefreshToken(int id, String refreshToken) {
+	    return mDao.updateRefreshToken(id, refreshToken);
+	}
+
+	@Override
+	public int deleteRefreshToken(int id) {
+	    return mDao.deleteRefreshToken(id);
+	}
 }
