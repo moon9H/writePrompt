@@ -7,7 +7,7 @@
 	<select id="select" resultType="Member">
 		SELECT id, email, password, role, nickname,
 		age, gender, profile, created_time
-		FROM user
+		FROM User
 		<where>
 			<if test="id != null and id != ''">
 				AND id = #{id}
@@ -17,7 +17,7 @@
 
 	<insert id="insert" parameterType="Member"
 		useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO user
+		INSERT INTO User
 		(email , password, role, nickname,
 		age, gender, profile)
 		VALUES
@@ -26,7 +26,7 @@
 	</insert>
 
 	<update id="update" parameterType="Member">
-		UPDATE user
+		UPDATE User
 		<set>
 			<if test="nickname != null and nickname != ''">
 				nickname = #{nickname},
@@ -46,7 +46,7 @@
 
 	<delete id="delete">
 		DELETE
-		FROM user
+		FROM User
 		WHERE
 		id = #{id}
 	</delete>
@@ -54,7 +54,7 @@
 	<select id="selectByEmail" resultType="Member">
 		SELECT id, email, password, role, nickname,
 		age, gender, profile, created_time
-		FROM user
+		FROM User
 		<where>
 			<if test="email != null and email != ''">
 				AND email = #{email}
@@ -75,7 +75,7 @@
 	</select>
 
 	<update id="updateRefreshToken">
-		update user
+		update User
 		set refresh_token =#{refreshToken}
 		where
 		id=#{id}
@@ -83,7 +83,7 @@
 
 
 	<update id="deleteRefreshToken">
-		UPDATE user
+		UPDATE User
 		SET refresh_token = NULL
 		WHERE id = #{id}
 	</update>
