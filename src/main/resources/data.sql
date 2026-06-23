@@ -1,162 +1,343 @@
+/*
+Legacy seed data below is disabled because it contains broken encoding and invalid SQL strings.
+The active seed data starts after this block comment.
+
 -- =========================================================
 -- data.sql
--- 개발용 더미 데이터
--- 모든 더미 계정의 로그인 비밀번호: 1234
+-- 개발???��? ?�이??
+-- 모든 ?��? 계정??로그??비�?번호: 1234
 -- =========================================================
 
--- 사용자 더미 데이터
+-- ?�용???��? ?�이??
 INSERT INTO User
 (email, password, role, nickname, age, gender, profile)
 VALUES
 ('teacher1@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', '김교사', '1990-03-15', 'M', 'teacher1.png'),
-('teacher2@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', '이선생', '1988-07-21', 'F', 'teacher2.png'),
-('teacher3@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', '박튜터', '1992-11-05', 'M', 'teacher3.png'),
+('teacher2@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', '?�선??, '1988-07-21', 'F', 'teacher2.png'),
+('teacher3@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', '박튜??, '1992-11-05', 'M', 'teacher3.png'),
 
-('student1@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '문학생', '2001-01-10', 'M', 'student1.png'),
-('student2@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '최학생', '2002-04-18', 'F', 'student2.png'),
-('student3@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '정학생', '2000-09-30', 'M', 'student3.png'),
-('student4@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '한학생', '2003-12-02', 'F', 'student4.png'),
-('student5@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '오학생', '2001-06-25', 'M', 'student5.png');
+('student1@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '문학??, '2001-01-10', 'M', 'student1.png'),
+('student2@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '최학??, '2002-04-18', 'F', 'student2.png'),
+('student3@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '?�학??, '2000-09-30', 'M', 'student3.png'),
+('student4@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '?�학??, '2003-12-02', 'F', 'student4.png'),
+('student5@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'STUDENT', '?�학??, '2001-06-25', 'M', 'student5.png');
 
 
--- 퀴즈 문제 더미 데이터
+-- ?�즈 문제 ?��? ?�이??
 INSERT INTO Quiz
 (user_id, title, image, level)
 VALUES
-(1, 'Java 변수와 자료형 퀴즈', 'quiz_java_variable.png', 'EASY'),
-(1, 'Java 조건문 퀴즈', 'quiz_java_condition.png', 'EASY'),
-(1, 'Java 반복문 퀴즈', 'quiz_java_loop.png', 'EASY'),
-(1, 'Java 객체지향 퀴즈', 'quiz_java_oop.png', 'NORMAL'),
-(1, 'Java 컬렉션 퀴즈', 'quiz_java_collection.png', 'NORMAL'),
+(1, 'Java 변?��? ?�료???�즈', 'quiz_java_variable.png', 'EASY'),
+(1, 'Java 조건�??�즈', 'quiz_java_condition.png', 'EASY'),
+(1, 'Java 반복�??�즈', 'quiz_java_loop.png', 'EASY'),
+(1, 'Java 객체지???�즈', 'quiz_java_oop.png', 'NORMAL'),
+(1, 'Java 컬렉???�즈', 'quiz_java_collection.png', 'NORMAL'),
 
-(1, 'Spring MVC 구조 퀴즈', 'quiz_spring_mvc.png', 'EASY'),
-(1, 'Spring DI 퀴즈', 'quiz_spring_di.png', 'EASY'),
-(1, 'Spring Controller 퀴즈', 'quiz_spring_controller.png', 'NORMAL'),
-(1, 'Spring Service 계층 퀴즈', 'quiz_spring_service.png', 'NORMAL'),
-(1, 'Spring Security 퀴즈', 'quiz_spring_security.png', 'HARD'),
+(1, 'Spring MVC 구조 ?�즈', 'quiz_spring_mvc.png', 'EASY'),
+(1, 'Spring DI ?�즈', 'quiz_spring_di.png', 'EASY'),
+(1, 'Spring Controller ?�즈', 'quiz_spring_controller.png', 'NORMAL'),
+(1, 'Spring Service 계층 ?�즈', 'quiz_spring_service.png', 'NORMAL'),
+(1, 'Spring Security ?�즈', 'quiz_spring_security.png', 'HARD'),
 
-(2, 'MySQL 기본 구조 퀴즈', 'quiz_mysql_basic.png', 'EASY'),
-(2, 'MySQL SELECT 퀴즈', 'quiz_mysql_select.png', 'EASY'),
-(2, 'MySQL JOIN 퀴즈', 'quiz_mysql_join.png', 'NORMAL'),
-(2, 'MySQL 인덱스 퀴즈', 'quiz_mysql_index.png', 'HARD'),
-(2, '트랜잭션 개념 퀴즈', 'quiz_transaction.png', 'NORMAL'),
+(2, 'MySQL 기본 구조 ?�즈', 'quiz_mysql_basic.png', 'EASY'),
+(2, 'MySQL SELECT ?�즈', 'quiz_mysql_select.png', 'EASY'),
+(2, 'MySQL JOIN ?�즈', 'quiz_mysql_join.png', 'NORMAL'),
+(2, 'MySQL ?�덱???�즈', 'quiz_mysql_index.png', 'HARD'),
+(2, '?�랜??�� 개념 ?�즈', 'quiz_transaction.png', 'NORMAL'),
 
-(2, 'REST API 기본 퀴즈', 'quiz_rest_basic.png', 'EASY'),
-(2, 'HTTP Method 퀴즈', 'quiz_http_method.png', 'EASY'),
-(2, 'HTTP Status Code 퀴즈', 'quiz_status_code.png', 'NORMAL'),
-(2, 'JWT 인증 흐름 퀴즈', 'quiz_jwt_flow.png', 'NORMAL'),
-(2, 'CORS 개념 퀴즈', 'quiz_cors.png', 'HARD'),
+(2, 'REST API 기본 ?�즈', 'quiz_rest_basic.png', 'EASY'),
+(2, 'HTTP Method ?�즈', 'quiz_http_method.png', 'EASY'),
+(2, 'HTTP Status Code ?�즈', 'quiz_status_code.png', 'NORMAL'),
+(2, 'JWT ?�증 ?�름 ?�즈', 'quiz_jwt_flow.png', 'NORMAL'),
+(2, 'CORS 개념 ?�즈', 'quiz_cors.png', 'HARD'),
 
-(3, 'Vue 기본 구조 퀴즈', 'quiz_vue_basic.png', 'EASY'),
-(3, 'Vue 컴포넌트 퀴즈', 'quiz_vue_component.png', 'EASY'),
-(3, 'Vue Router 퀴즈', 'quiz_vue_router.png', 'NORMAL'),
-(3, 'Pinia 상태관리 퀴즈', 'quiz_pinia.png', 'NORMAL'),
-(3, 'Axios 통신 흐름 퀴즈', 'quiz_axios.png', 'NORMAL');
+(3, 'Vue 기본 구조 ?�즈', 'quiz_vue_basic.png', 'EASY'),
+(3, 'Vue 컴포?�트 ?�즈', 'quiz_vue_component.png', 'EASY'),
+(3, 'Vue Router ?�즈', 'quiz_vue_router.png', 'NORMAL'),
+(3, 'Pinia ?�태관�??�즈', 'quiz_pinia.png', 'NORMAL'),
+(3, 'Axios ?�신 ?�름 ?�즈', 'quiz_axios.png', 'NORMAL');
 
 
--- 퀴즈룸 더미 데이터
+-- ?�즈�??��? ?�이??
 INSERT INTO QuizRoom
 (user_id, title, room_code, state, level, description, solved_cnt, `like`)
 VALUES
-(1, 'Java 기초 퀴즈방', 'ROOM-JAVA-001', 'OPEN', 'EASY', 'Java 기초 문법을 연습하는 퀴즈방', 12, 8),
-(1, 'Java 객체지향 퀴즈방', 'ROOM-JAVA-002', 'OPEN', 'NORMAL', '객체지향 개념을 이미지로 표현하는 퀴즈방', 6, 11),
-(1, 'Spring 입문 퀴즈방', 'ROOM-SPRING-001', 'OPEN', 'EASY', 'Spring MVC와 DI를 다루는 입문 퀴즈방', 21, 15),
-(1, 'Spring 심화 퀴즈방', 'ROOM-SPRING-002', 'CLOSED', 'HARD', 'Spring Security와 인증 흐름을 다루는 퀴즈방', 4, 3),
+(1, 'Java 기초 ?�즈�?, 'ROOM-JAVA-001', 'OPEN', 'EASY', 'Java 기초 문법???�습?�는 ?�즈�?, 12, 8),
+(1, 'Java 객체지???�즈�?, 'ROOM-JAVA-002', 'OPEN', 'NORMAL', '객체지??개념???��?지�??�현?�는 ?�즈�?, 6, 11),
+(1, 'Spring ?�문 ?�즈�?, 'ROOM-SPRING-001', 'OPEN', 'EASY', 'Spring MVC?� DI�??�루???�문 ?�즈�?, 21, 15),
+(1, 'Spring ?�화 ?�즈�?, 'ROOM-SPRING-002', 'CLOSED', 'HARD', 'Spring Security?� ?�증 ?�름???�루???�즈�?, 4, 3),
 
-(2, 'MySQL 기초 퀴즈방', 'ROOM-MYSQL-001', 'OPEN', 'EASY', 'SQL과 테이블 구조를 연습하는 퀴즈방', 18, 9),
-(2, 'MySQL JOIN 퀴즈방', 'ROOM-MYSQL-002', 'OPEN', 'NORMAL', 'JOIN과 관계형 데이터 표현을 연습하는 퀴즈방', 9, 7),
-(2, 'REST API 퀴즈방', 'ROOM-REST-001', 'OPEN', 'NORMAL', 'REST API 요청과 응답 흐름을 학습하는 퀴즈방', 15, 13),
-(2, 'JWT 인증 퀴즈방', 'ROOM-JWT-001', 'OPEN', 'NORMAL', 'JWT 인증 흐름을 이미지로 표현하는 퀴즈방', 7, 10),
+(2, 'MySQL 기초 ?�즈�?, 'ROOM-MYSQL-001', 'OPEN', 'EASY', 'SQL�??�이�?구조�??�습?�는 ?�즈�?, 18, 9),
+(2, 'MySQL JOIN ?�즈�?, 'ROOM-MYSQL-002', 'OPEN', 'NORMAL', 'JOIN�?관계형 ?�이???�현???�습?�는 ?�즈�?, 9, 7),
+(2, 'REST API ?�즈�?, 'ROOM-REST-001', 'OPEN', 'NORMAL', 'REST API ?�청�??�답 ?�름???�습?�는 ?�즈�?, 15, 13),
+(2, 'JWT ?�증 ?�즈�?, 'ROOM-JWT-001', 'OPEN', 'NORMAL', 'JWT ?�증 ?�름???��?지�??�현?�는 ?�즈�?, 7, 10),
 
-(3, 'Vue 입문 퀴즈방', 'ROOM-VUE-001', 'OPEN', 'EASY', 'Vue 기본 구조와 컴포넌트를 다루는 퀴즈방', 11, 6),
-(3, '프론트 통신 퀴즈방', 'ROOM-FRONT-001', 'OPEN', 'NORMAL', 'Axios와 Router 흐름을 연습하는 퀴즈방', 5, 4),
-(3, '비공개 테스트 퀴즈방', 'ROOM-PRIVATE-001', 'CLOSED', 'EASY', 'OPEN 상태가 아닌 테스트용 퀴즈방', 0, 0),
-(3, '작성 중인 퀴즈방', 'ROOM-DRAFT-001', 'DRAFT', 'NORMAL', '아직 공개하지 않은 퀴즈방', 0, 0);
+(3, 'Vue ?�문 ?�즈�?, 'ROOM-VUE-001', 'OPEN', 'EASY', 'Vue 기본 구조?� 컴포?�트�??�루???�즈�?, 11, 6),
+(3, '?�론???�신 ?�즈�?, 'ROOM-FRONT-001', 'OPEN', 'NORMAL', 'Axios?� Router ?�름???�습?�는 ?�즈�?, 5, 4),
+(3, '비공�??�스???�즈�?, 'ROOM-PRIVATE-001', 'CLOSED', 'EASY', 'OPEN ?�태가 ?�닌 ?�스?�용 ?�즈�?, 0, 0),
+(3, '?�성 중인 ?�즈�?, 'ROOM-DRAFT-001', 'DRAFT', 'NORMAL', '?�직 공개?��? ?��? ?�즈�?, 0, 0);
 
 
--- 퀴즈룸 - 퀴즈 연결 데이터
+-- ?�즈�?- ?�즈 ?�결 ?�이??
 INSERT INTO Quiz_QuizRoom
 (quiz_id, quiz_room_id, quiz_order)
 VALUES
--- Java 기초 퀴즈방
+-- Java 기초 ?�즈�?
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3),
 
--- Java 객체지향 퀴즈방
+-- Java 객체지???�즈�?
 (4, 2, 1),
 (5, 2, 2),
 (1, 2, 3),
 
--- Spring 입문 퀴즈방
+-- Spring ?�문 ?�즈�?
 (6, 3, 1),
 (7, 3, 2),
 (8, 3, 3),
 
--- Spring 심화 퀴즈방 CLOSED
+-- Spring ?�화 ?�즈�?CLOSED
 (9, 4, 1),
 (10, 4, 2),
 (19, 4, 3),
 
--- MySQL 기초 퀴즈방
+-- MySQL 기초 ?�즈�?
 (11, 5, 1),
 (12, 5, 2),
 (15, 5, 3),
 
--- MySQL JOIN 퀴즈방
+-- MySQL JOIN ?�즈�?
 (13, 6, 1),
 (14, 6, 2),
 (15, 6, 3),
 
--- REST API 퀴즈방
+-- REST API ?�즈�?
 (16, 7, 1),
 (17, 7, 2),
 (18, 7, 3),
 
--- JWT 인증 퀴즈방
+-- JWT ?�증 ?�즈�?
 (19, 8, 1),
 (20, 8, 2),
 (10, 8, 3),
 
--- Vue 입문 퀴즈방
+-- Vue ?�문 ?�즈�?
 (21, 9, 1),
 (22, 9, 2),
 (23, 9, 3),
 
--- 프론트 통신 퀴즈방
+-- ?�론???�신 ?�즈�?
 (23, 10, 1),
 (24, 10, 2),
 (25, 10, 3),
 
--- 비공개 테스트 퀴즈방
+-- 비공�??�스???�즈�?
 (21, 11, 1),
 (22, 11, 2),
 
--- 작성 중인 퀴즈방
+-- ?�성 중인 ?�즈�?
 (24, 12, 1),
 (25, 12, 2);
 
 
--- 퀴즈 결과 더미 데이터
+-- ?�즈 결과 ?��? ?�이??
 INSERT INTO QuizResult
 (user_id, quiz_room_id, score, feedback)
 VALUES
-(4, 1, 85.33, 'Java 기초 문법의 핵심 요소를 전반적으로 잘 파악했습니다. 변수, 조건문, 반복문에 대한 표현이 안정적이며, 주요 개념을 이미지로 연결하려는 시도가 좋았습니다. 다만 일부 문제에서는 객체 간 관계나 흐름을 조금 더 구체적으로 작성하면 더 좋은 결과를 얻을 수 있습니다.'),
-(5, 1, 72.00, 'Java 기초 개념을 어느 정도 이해하고 있지만, 프롬프트의 구체성이 부족한 부분이 있었습니다. 주요 대상과 배경을 명확히 설명하면 생성 이미지가 정답에 더 가까워질 수 있습니다.'),
-(6, 1, 91.67, '전체적으로 Java 기초 개념을 매우 잘 표현했습니다. 각 문제의 핵심 요소가 이미지에 잘 반영되었고, 프롬프트 구성도 안정적이었습니다. 앞으로는 세부 배치나 스타일을 조금 더 구체화하면 완성도가 더 높아질 수 있습니다.'),
+(4, 1, 85.33, 'Java 기초 문법???�심 ?�소�??�반?�으�????�악?�습?�다. 변?? 조건�? 반복문에 ?�???�현???�정?�이�? 주요 개념???��?지�??�결?�려???�도가 좋았?�니?? ?�만 ?��? 문제?�서??객체 �?관계나 ?�름??조금 ??구체?�으�??�성?�면 ??좋�? 결과�??�을 ???�습?�다.'),
+(5, 1, 72.00, 'Java 기초 개념???�느 ?�도 ?�해?�고 ?��?�? ?�롬?�트??구체?�이 부족한 부분이 ?�었?�니?? 주요 ?�?�과 배경??명확???�명?�면 ?�성 ?��?지가 ?�답????가까워�????�습?�다.'),
+(6, 1, 91.67, '?�체?�으�?Java 기초 개념??매우 ???�현?�습?�다. �?문제???�심 ?�소가 ?��?지????반영?�었�? ?�롬?�트 구성???�정?�이?�습?�다. ?�으로는 ?��? 배치???��??�을 조금 ??구체?�하�??�성?��? ???�아�????�습?�다.'),
 
-(4, 3, 78.67, 'Spring MVC와 DI의 기본 흐름을 잘 이해하고 있습니다. 컨트롤러와 서비스의 관계 표현은 좋았지만, 데이터 이동 흐름을 더 명확히 작성하면 더 좋은 결과를 만들 수 있습니다.'),
-(5, 3, 64.33, 'Spring의 주요 개념을 일부 반영했지만 전체 구조 표현이 다소 부족했습니다. 프롬프트에 계층 구조와 객체 간 관계를 더 구체적으로 작성하는 연습이 필요합니다.'),
-(7, 3, 88.00, 'Spring 입문 개념을 안정적으로 표현했습니다. 주요 구성 요소가 잘 드러났고, 전체적인 이미지 방향도 좋았습니다. 조금 더 구체적인 구도 설명이 추가되면 더 정확한 결과를 얻을 수 있습니다.'),
+(4, 3, 78.67, 'Spring MVC?� DI??기본 ?�름?????�해?�고 ?�습?�다. 컨트롤러?� ?�비?�의 관�??�현?� 좋았지�? ?�이???�동 ?�름????명확???�성?�면 ??좋�? 결과�?만들 ???�습?�다.'),
+(5, 3, 64.33, 'Spring??주요 개념???��? 반영?��?�??�체 구조 ?�현???�소 부족했?�니?? ?�롬?�트??계층 구조?� 객체 �?관계�? ??구체?�으�??�성?�는 ?�습???�요?�니??'),
+(7, 3, 88.00, 'Spring ?�문 개념???�정?�으�??�현?�습?�다. 주요 구성 ?�소가 ???�러?�고, ?�체?�인 ?��?지 방향??좋았?�니?? 조금 ??구체?�인 구도 ?�명??추�??�면 ???�확??결과�??�을 ???�습?�다.'),
 
-(4, 5, 81.00, 'MySQL의 기본 개념과 데이터베이스 구조를 잘 표현했습니다. 테이블과 데이터 저장의 느낌이 잘 드러났습니다. 다만 관계형 구조를 더 명확히 나타내면 더욱 좋겠습니다.'),
-(6, 5, 59.67, 'MySQL과 관련된 요소는 일부 포함되었지만 핵심 구조 표현이 부족했습니다. 테이블, 컬럼, 데이터 관계를 더 직접적으로 작성하는 것이 필요합니다.'),
-(8, 5, 94.00, 'MySQL 기본 구조를 매우 잘 표현했습니다. 데이터 저장, 테이블 구성, 관계의 느낌이 이미지에 잘 반영되었습니다. 세부 스타일만 조금 더 정리하면 더욱 완성도 있는 결과가 될 수 있습니다.'),
+(4, 5, 81.00, 'MySQL??기본 개념�??�이?�베?�스 구조�????�현?�습?�다. ?�이블과 ?�이???�?�의 ?�낌?????�러?�습?�다. ?�만 관계형 구조�???명확???��??�면 ?�욱 좋겠?�니??'),
+(6, 5, 59.67, 'MySQL�?관?�된 ?�소???��? ?�함?�었지�??�심 구조 ?�현??부족했?�니?? ?�이�? 컬럼, ?�이??관계�? ??직접?�으�??�성?�는 것이 ?�요?�니??'),
+(8, 5, 94.00, 'MySQL 기본 구조�?매우 ???�현?�습?�다. ?�이???�?? ?�이�?구성, 관계의 ?�낌???��?지????반영?�었?�니?? ?��? ?��??�만 조금 ???�리?�면 ?�욱 ?�성???�는 결과가 ?????�습?�다.'),
 
-(5, 7, 76.33, 'REST API의 요청과 응답 흐름을 전반적으로 잘 표현했습니다. 클라이언트와 서버 관계가 드러났지만, HTTP 메서드나 상태 코드 같은 세부 요소를 추가하면 더 좋습니다.'),
-(7, 7, 42.00, 'REST API의 핵심 흐름이 충분히 드러나지 않았습니다. 클라이언트, 서버, 요청, 응답의 관계를 프롬프트에 더 명확히 작성할 필요가 있습니다.'),
-(8, 7, 89.67, 'REST API의 흐름과 구성 요소를 매우 잘 표현했습니다. 요청과 응답의 방향성이 명확했고, 전체적인 구조도 안정적이었습니다. 다음에는 데이터 형식까지 더 구체적으로 표현해보면 좋겠습니다.'),
+(5, 7, 76.33, 'REST API???�청�??�답 ?�름???�반?�으�????�현?�습?�다. ?�라?�언?��? ?�버 관계�? ?�러?��?�? HTTP 메서?�나 ?�태 코드 같�? ?��? ?�소�?추�??�면 ??좋습?�다.'),
+(7, 7, 42.00, 'REST API???�심 ?�름??충분???�러?��? ?�았?�니?? ?�라?�언?? ?�버, ?�청, ?�답??관계�? ?�롬?�트????명확???�성???�요가 ?�습?�다.'),
+(8, 7, 89.67, 'REST API???�름�?구성 ?�소�?매우 ???�현?�습?�다. ?�청�??�답??방향?�이 명확?�고, ?�체?�인 구조???�정?�이?�습?�다. ?�음?�는 ?�이???�식까�? ??구체?�으�??�현?�보�?좋겠?�니??'),
 
-(4, 9, 69.33, 'Vue의 기본 구조는 어느 정도 표현되었지만 컴포넌트 간 관계가 명확하지 않았습니다. 화면 구성, 컴포넌트, 상태 흐름을 더 구체적으로 작성하면 좋겠습니다.'),
-(5, 9, 83.00, 'Vue 컴포넌트와 화면 구성의 느낌을 잘 살렸습니다. 주요 요소가 안정적으로 드러났고, 프론트엔드 구조를 이해하고 있다는 점이 보입니다. 라우터와 상태 흐름까지 포함하면 더 좋은 결과가 될 수 있습니다.'),
-(6, 10, 74.00, '프론트엔드 통신 흐름을 어느 정도 잘 표현했습니다. Axios와 서버 통신의 방향성은 보이지만, 요청과 응답 데이터의 흐름을 더 구체적으로 작성하면 좋겠습니다.');
+(4, 9, 69.33, 'Vue??기본 구조???�느 ?�도 ?�현?�었지�?컴포?�트 �?관계�? 명확?��? ?�았?�니?? ?�면 구성, 컴포?�트, ?�태 ?�름????구체?�으�??�성?�면 좋겠?�니??'),
+(5, 9, 83.00, 'Vue 컴포?�트?� ?�면 구성???�낌?????�렸?�니?? 주요 ?�소가 ?�정?�으�??�러?�고, ?�론?�엔??구조�??�해?�고 ?�다???�이 보입?�다. ?�우?��? ?�태 ?�름까�? ?�함?�면 ??좋�? 결과가 ?????�습?�다.'),
+(6, 10, 74.00, '?�론?�엔???�신 ?�름???�느 ?�도 ???�현?�습?�다. Axios?� ?�버 ?�신??방향?��? 보이지�? ?�청�??�답 ?�이?�의 ?�름????구체?�으�??�성?�면 좋겠?�니??');
+*/
+
+-- =========================================================
+-- Active development seed data
+-- All sample user passwords are: 1234
+-- =========================================================
+
+INSERT INTO User
+(id, email, password, role, nickname, age, gender, profile)
+VALUES
+(1, 'teacher1@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', 'Teacher Kim', '1990-03-15', 'M', 'teacher1.png'),
+(2, 'teacher2@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', 'Teacher Lee', '1988-07-21', 'F', 'teacher2.png'),
+(3, 'teacher3@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', 'Teacher Park', '1992-11-05', 'M', 'teacher3.png'),
+(4, 'teacher4@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', 'Teacher Choi', '1986-02-12', 'F', 'teacher4.png'),
+(5, 'teacher5@test.com', '{bcrypt}$2a$10$dVCma04hrbMCmzu7VntgO.SK4TQJBb7XqNPX5RcXYDzIDck2EyPvm', 'TEACHER', 'Teacher Jung', '1991-09-28', 'M', 'teacher5.png');
+
+INSERT INTO Quiz
+(id, user_id, title, image, level)
+VALUES
+(1, 1, 'Teacher 1 Image Quiz 1', '/uploads/images/001_student.png', 'EASY'),
+(2, 1, 'Teacher 1 Image Quiz 2', '/uploads/images/001_teacher.png', 'EASY'),
+(3, 1, 'Teacher 1 Image Quiz 3', '/uploads/images/002_student.png', 'EASY'),
+(4, 1, 'Teacher 1 Image Quiz 4', '/uploads/images/002_teacher.png', 'EASY'),
+(5, 1, 'Teacher 1 Image Quiz 5', '/uploads/images/003_student.png', 'EASY'),
+(6, 1, 'Teacher 1 Image Quiz 6', '/uploads/images/003_teacher.png', 'EASY'),
+(7, 1, 'Teacher 1 Image Quiz 7', '/uploads/images/004_student.png', 'EASY'),
+(8, 1, 'Teacher 1 Image Quiz 8', '/uploads/images/004_teacher.png', 'NORMAL'),
+(9, 1, 'Teacher 1 Image Quiz 9', '/uploads/images/005_student.png', 'NORMAL'),
+(10, 1, 'Teacher 1 Image Quiz 10', '/uploads/images/005_teacher.png', 'NORMAL'),
+(11, 1, 'Teacher 1 Image Quiz 11', '/uploads/images/006_student.png', 'NORMAL'),
+(12, 1, 'Teacher 1 Image Quiz 12', '/uploads/images/006_teacher.png', 'NORMAL'),
+(13, 1, 'Teacher 1 Image Quiz 13', '/uploads/images/007_student.png', 'NORMAL'),
+(14, 1, 'Teacher 1 Image Quiz 14', '/uploads/images/007_teacher.png', 'NORMAL'),
+(15, 1, 'Teacher 1 Image Quiz 15', '/uploads/images/008_student.png', 'HARD'),
+(16, 1, 'Teacher 1 Image Quiz 16', '/uploads/images/008_teacher.png', 'HARD'),
+(17, 1, 'Teacher 1 Image Quiz 17', '/uploads/images/009_student.png', 'HARD'),
+(18, 1, 'Teacher 1 Image Quiz 18', '/uploads/images/009_teacher.png', 'HARD'),
+(19, 1, 'Teacher 1 Image Quiz 19', '/uploads/images/010_student.png', 'HARD'),
+(20, 1, 'Teacher 1 Image Quiz 20', '/uploads/images/010_teacher.png', 'HARD'),
+(21, 2, 'Teacher 2 Image Quiz 1', '/uploads/images/011_student.png', 'EASY'),
+(22, 2, 'Teacher 2 Image Quiz 2', '/uploads/images/011_teacher.png', 'EASY'),
+(23, 2, 'Teacher 2 Image Quiz 3', '/uploads/images/012_student.png', 'EASY'),
+(24, 2, 'Teacher 2 Image Quiz 4', '/uploads/images/012_teacher.png', 'EASY'),
+(25, 2, 'Teacher 2 Image Quiz 5', '/uploads/images/013_student.png', 'EASY'),
+(26, 2, 'Teacher 2 Image Quiz 6', '/uploads/images/013_teacher.png', 'EASY'),
+(27, 2, 'Teacher 2 Image Quiz 7', '/uploads/images/014_student.png', 'EASY'),
+(28, 2, 'Teacher 2 Image Quiz 8', '/uploads/images/014_teacher.png', 'NORMAL'),
+(29, 2, 'Teacher 2 Image Quiz 9', '/uploads/images/015_student.png', 'NORMAL'),
+(30, 2, 'Teacher 2 Image Quiz 10', '/uploads/images/015_teacher.png', 'NORMAL'),
+(31, 2, 'Teacher 2 Image Quiz 11', '/uploads/images/016_student.png', 'NORMAL'),
+(32, 2, 'Teacher 2 Image Quiz 12', '/uploads/images/016_teacher.png', 'NORMAL'),
+(33, 2, 'Teacher 2 Image Quiz 13', '/uploads/images/017_student.png', 'NORMAL'),
+(34, 2, 'Teacher 2 Image Quiz 14', '/uploads/images/017_teacher.png', 'NORMAL'),
+(35, 2, 'Teacher 2 Image Quiz 15', '/uploads/images/018_student.png', 'HARD'),
+(36, 2, 'Teacher 2 Image Quiz 16', '/uploads/images/018_teacher.png', 'HARD'),
+(37, 2, 'Teacher 2 Image Quiz 17', '/uploads/images/019_student.png', 'HARD'),
+(38, 2, 'Teacher 2 Image Quiz 18', '/uploads/images/019_teacher.png', 'HARD'),
+(39, 2, 'Teacher 2 Image Quiz 19', '/uploads/images/020_student.png', 'HARD'),
+(40, 2, 'Teacher 2 Image Quiz 20', '/uploads/images/020_teacher.png', 'HARD'),
+(41, 3, 'Teacher 3 Image Quiz 1', '/uploads/images/021_student.png', 'EASY'),
+(42, 3, 'Teacher 3 Image Quiz 2', '/uploads/images/021_teacher.png', 'EASY'),
+(43, 3, 'Teacher 3 Image Quiz 3', '/uploads/images/022_student.png', 'EASY'),
+(44, 3, 'Teacher 3 Image Quiz 4', '/uploads/images/022_teacher.png', 'EASY'),
+(45, 3, 'Teacher 3 Image Quiz 5', '/uploads/images/023_student.png', 'EASY'),
+(46, 3, 'Teacher 3 Image Quiz 6', '/uploads/images/023_teacher.png', 'EASY'),
+(47, 3, 'Teacher 3 Image Quiz 7', '/uploads/images/024_student.png', 'EASY'),
+(48, 3, 'Teacher 3 Image Quiz 8', '/uploads/images/024_teacher.png', 'NORMAL'),
+(49, 3, 'Teacher 3 Image Quiz 9', '/uploads/images/025_student.png', 'NORMAL'),
+(50, 3, 'Teacher 3 Image Quiz 10', '/uploads/images/025_teacher.png', 'NORMAL'),
+(51, 3, 'Teacher 3 Image Quiz 11', '/uploads/images/026_student.png', 'NORMAL'),
+(52, 3, 'Teacher 3 Image Quiz 12', '/uploads/images/026_teacher.png', 'NORMAL'),
+(53, 3, 'Teacher 3 Image Quiz 13', '/uploads/images/027_student.png', 'NORMAL'),
+(54, 3, 'Teacher 3 Image Quiz 14', '/uploads/images/027_teacher.png', 'NORMAL'),
+(55, 3, 'Teacher 3 Image Quiz 15', '/uploads/images/028_student.png', 'HARD'),
+(56, 3, 'Teacher 3 Image Quiz 16', '/uploads/images/028_teacher.png', 'HARD'),
+(57, 3, 'Teacher 3 Image Quiz 17', '/uploads/images/029_student.png', 'HARD'),
+(58, 3, 'Teacher 3 Image Quiz 18', '/uploads/images/029_teacher.png', 'HARD'),
+(59, 3, 'Teacher 3 Image Quiz 19', '/uploads/images/030_student.png', 'HARD'),
+(60, 3, 'Teacher 3 Image Quiz 20', '/uploads/images/030_teacher.png', 'HARD'),
+(61, 4, 'Teacher 4 Image Quiz 1', '/uploads/images/031_student.png', 'EASY'),
+(62, 4, 'Teacher 4 Image Quiz 2', '/uploads/images/031_teacher.png', 'EASY'),
+(63, 4, 'Teacher 4 Image Quiz 3', '/uploads/images/032_student.png', 'EASY'),
+(64, 4, 'Teacher 4 Image Quiz 4', '/uploads/images/032_teacher.png', 'EASY'),
+(65, 4, 'Teacher 4 Image Quiz 5', '/uploads/images/033_student.png', 'EASY'),
+(66, 4, 'Teacher 4 Image Quiz 6', '/uploads/images/033_teacher.png', 'EASY'),
+(67, 4, 'Teacher 4 Image Quiz 7', '/uploads/images/034_student.png', 'EASY'),
+(68, 4, 'Teacher 4 Image Quiz 8', '/uploads/images/034_teacher.png', 'NORMAL'),
+(69, 4, 'Teacher 4 Image Quiz 9', '/uploads/images/035_student.png', 'NORMAL'),
+(70, 4, 'Teacher 4 Image Quiz 10', '/uploads/images/035_teacher.png', 'NORMAL'),
+(71, 4, 'Teacher 4 Image Quiz 11', '/uploads/images/036_student.png', 'NORMAL'),
+(72, 4, 'Teacher 4 Image Quiz 12', '/uploads/images/036_teacher.png', 'NORMAL'),
+(73, 4, 'Teacher 4 Image Quiz 13', '/uploads/images/037_student.png', 'NORMAL'),
+(74, 4, 'Teacher 4 Image Quiz 14', '/uploads/images/037_teacher.png', 'NORMAL'),
+(75, 4, 'Teacher 4 Image Quiz 15', '/uploads/images/038_student.png', 'HARD'),
+(76, 4, 'Teacher 4 Image Quiz 16', '/uploads/images/038_teacher.png', 'HARD'),
+(77, 4, 'Teacher 4 Image Quiz 17', '/uploads/images/039_student.png', 'HARD'),
+(78, 4, 'Teacher 4 Image Quiz 18', '/uploads/images/039_teacher.png', 'HARD'),
+(79, 4, 'Teacher 4 Image Quiz 19', '/uploads/images/040_student.png', 'HARD'),
+(80, 4, 'Teacher 4 Image Quiz 20', '/uploads/images/040_teacher.png', 'HARD'),
+(81, 5, 'Teacher 5 Image Quiz 1', '/uploads/images/041_student.png', 'EASY'),
+(82, 5, 'Teacher 5 Image Quiz 2', '/uploads/images/041_teacher.png', 'EASY'),
+(83, 5, 'Teacher 5 Image Quiz 3', '/uploads/images/042_student.png', 'EASY'),
+(84, 5, 'Teacher 5 Image Quiz 4', '/uploads/images/042_teacher.png', 'EASY'),
+(85, 5, 'Teacher 5 Image Quiz 5', '/uploads/images/043_student.png', 'EASY'),
+(86, 5, 'Teacher 5 Image Quiz 6', '/uploads/images/043_teacher.png', 'EASY'),
+(87, 5, 'Teacher 5 Image Quiz 7', '/uploads/images/044_student.png', 'EASY'),
+(88, 5, 'Teacher 5 Image Quiz 8', '/uploads/images/044_teacher.png', 'NORMAL'),
+(89, 5, 'Teacher 5 Image Quiz 9', '/uploads/images/045_student.png', 'NORMAL'),
+(90, 5, 'Teacher 5 Image Quiz 10', '/uploads/images/045_teacher.png', 'NORMAL'),
+(91, 5, 'Teacher 5 Image Quiz 11', '/uploads/images/046_student.png', 'NORMAL'),
+(92, 5, 'Teacher 5 Image Quiz 12', '/uploads/images/046_teacher.png', 'NORMAL'),
+(93, 5, 'Teacher 5 Image Quiz 13', '/uploads/images/047_student.png', 'NORMAL'),
+(94, 5, 'Teacher 5 Image Quiz 14', '/uploads/images/047_teacher.png', 'NORMAL'),
+(95, 5, 'Teacher 5 Image Quiz 15', '/uploads/images/048_student.png', 'HARD'),
+(96, 5, 'Teacher 5 Image Quiz 16', '/uploads/images/048_teacher.png', 'HARD'),
+(97, 5, 'Teacher 5 Image Quiz 17', '/uploads/images/049_student.png', 'HARD'),
+(98, 5, 'Teacher 5 Image Quiz 18', '/uploads/images/049_teacher.png', 'HARD'),
+(99, 5, 'Teacher 5 Image Quiz 19', '/uploads/images/050_student.png', 'HARD'),
+(100, 5, 'Teacher 5 Image Quiz 20', '/uploads/images/050_teacher.png', 'HARD');
+
+INSERT INTO QuizRoom
+(id, user_id, title, room_code, state, level, description, solved_cnt, `like`)
+VALUES
+(1, 1, 'Teacher 1 Quiz Room 1', 'T01-ROOM-01', 'OPEN', 'EASY', 'Teacher 1 room using quizzes 1 through 4.', 0, 0),
+(2, 1, 'Teacher 1 Quiz Room 2', 'T01-ROOM-02', 'OPEN', 'EASY', 'Teacher 1 room using quizzes 5 through 8.', 0, 0),
+(3, 1, 'Teacher 1 Quiz Room 3', 'T01-ROOM-03', 'OPEN', 'NORMAL', 'Teacher 1 room using quizzes 9 through 12.', 0, 0),
+(4, 1, 'Teacher 1 Quiz Room 4', 'T01-ROOM-04', 'OPEN', 'NORMAL', 'Teacher 1 room using quizzes 13 through 16.', 0, 0),
+(5, 1, 'Teacher 1 Quiz Room 5', 'T01-ROOM-05', 'OPEN', 'HARD', 'Teacher 1 room using quizzes 17 through 20.', 0, 0),
+(6, 2, 'Teacher 2 Quiz Room 1', 'T02-ROOM-01', 'OPEN', 'EASY', 'Teacher 2 room using quizzes 1 through 4.', 0, 0),
+(7, 2, 'Teacher 2 Quiz Room 2', 'T02-ROOM-02', 'OPEN', 'EASY', 'Teacher 2 room using quizzes 5 through 8.', 0, 0),
+(8, 2, 'Teacher 2 Quiz Room 3', 'T02-ROOM-03', 'OPEN', 'NORMAL', 'Teacher 2 room using quizzes 9 through 12.', 0, 0),
+(9, 2, 'Teacher 2 Quiz Room 4', 'T02-ROOM-04', 'OPEN', 'NORMAL', 'Teacher 2 room using quizzes 13 through 16.', 0, 0),
+(10, 2, 'Teacher 2 Quiz Room 5', 'T02-ROOM-05', 'OPEN', 'HARD', 'Teacher 2 room using quizzes 17 through 20.', 0, 0),
+(11, 3, 'Teacher 3 Quiz Room 1', 'T03-ROOM-01', 'OPEN', 'EASY', 'Teacher 3 room using quizzes 1 through 4.', 0, 0),
+(12, 3, 'Teacher 3 Quiz Room 2', 'T03-ROOM-02', 'OPEN', 'EASY', 'Teacher 3 room using quizzes 5 through 8.', 0, 0),
+(13, 3, 'Teacher 3 Quiz Room 3', 'T03-ROOM-03', 'OPEN', 'NORMAL', 'Teacher 3 room using quizzes 9 through 12.', 0, 0),
+(14, 3, 'Teacher 3 Quiz Room 4', 'T03-ROOM-04', 'OPEN', 'NORMAL', 'Teacher 3 room using quizzes 13 through 16.', 0, 0),
+(15, 3, 'Teacher 3 Quiz Room 5', 'T03-ROOM-05', 'OPEN', 'HARD', 'Teacher 3 room using quizzes 17 through 20.', 0, 0),
+(16, 4, 'Teacher 4 Quiz Room 1', 'T04-ROOM-01', 'OPEN', 'EASY', 'Teacher 4 room using quizzes 1 through 4.', 0, 0),
+(17, 4, 'Teacher 4 Quiz Room 2', 'T04-ROOM-02', 'OPEN', 'EASY', 'Teacher 4 room using quizzes 5 through 8.', 0, 0),
+(18, 4, 'Teacher 4 Quiz Room 3', 'T04-ROOM-03', 'OPEN', 'NORMAL', 'Teacher 4 room using quizzes 9 through 12.', 0, 0),
+(19, 4, 'Teacher 4 Quiz Room 4', 'T04-ROOM-04', 'OPEN', 'NORMAL', 'Teacher 4 room using quizzes 13 through 16.', 0, 0),
+(20, 4, 'Teacher 4 Quiz Room 5', 'T04-ROOM-05', 'OPEN', 'HARD', 'Teacher 4 room using quizzes 17 through 20.', 0, 0),
+(21, 5, 'Teacher 5 Quiz Room 1', 'T05-ROOM-01', 'OPEN', 'EASY', 'Teacher 5 room using quizzes 1 through 4.', 0, 0),
+(22, 5, 'Teacher 5 Quiz Room 2', 'T05-ROOM-02', 'OPEN', 'EASY', 'Teacher 5 room using quizzes 5 through 8.', 0, 0),
+(23, 5, 'Teacher 5 Quiz Room 3', 'T05-ROOM-03', 'OPEN', 'NORMAL', 'Teacher 5 room using quizzes 9 through 12.', 0, 0),
+(24, 5, 'Teacher 5 Quiz Room 4', 'T05-ROOM-04', 'OPEN', 'NORMAL', 'Teacher 5 room using quizzes 13 through 16.', 0, 0),
+(25, 5, 'Teacher 5 Quiz Room 5', 'T05-ROOM-05', 'OPEN', 'HARD', 'Teacher 5 room using quizzes 17 through 20.', 0, 0);
+
+INSERT INTO Quiz_QuizRoom
+(quiz_id, quiz_room_id, quiz_order)
+VALUES
+(1, 1, 1), (2, 1, 2), (3, 1, 3), (4, 1, 4),
+(5, 2, 1), (6, 2, 2), (7, 2, 3), (8, 2, 4),
+(9, 3, 1), (10, 3, 2), (11, 3, 3), (12, 3, 4),
+(13, 4, 1), (14, 4, 2), (15, 4, 3), (16, 4, 4),
+(17, 5, 1), (18, 5, 2), (19, 5, 3), (20, 5, 4),
+(21, 6, 1), (22, 6, 2), (23, 6, 3), (24, 6, 4),
+(25, 7, 1), (26, 7, 2), (27, 7, 3), (28, 7, 4),
+(29, 8, 1), (30, 8, 2), (31, 8, 3), (32, 8, 4),
+(33, 9, 1), (34, 9, 2), (35, 9, 3), (36, 9, 4),
+(37, 10, 1), (38, 10, 2), (39, 10, 3), (40, 10, 4),
+(41, 11, 1), (42, 11, 2), (43, 11, 3), (44, 11, 4),
+(45, 12, 1), (46, 12, 2), (47, 12, 3), (48, 12, 4),
+(49, 13, 1), (50, 13, 2), (51, 13, 3), (52, 13, 4),
+(53, 14, 1), (54, 14, 2), (55, 14, 3), (56, 14, 4),
+(57, 15, 1), (58, 15, 2), (59, 15, 3), (60, 15, 4),
+(61, 16, 1), (62, 16, 2), (63, 16, 3), (64, 16, 4),
+(65, 17, 1), (66, 17, 2), (67, 17, 3), (68, 17, 4),
+(69, 18, 1), (70, 18, 2), (71, 18, 3), (72, 18, 4),
+(73, 19, 1), (74, 19, 2), (75, 19, 3), (76, 19, 4),
+(77, 20, 1), (78, 20, 2), (79, 20, 3), (80, 20, 4),
+(81, 21, 1), (82, 21, 2), (83, 21, 3), (84, 21, 4),
+(85, 22, 1), (86, 22, 2), (87, 22, 3), (88, 22, 4),
+(89, 23, 1), (90, 23, 2), (91, 23, 3), (92, 23, 4),
+(93, 24, 1), (94, 24, 2), (95, 24, 3), (96, 24, 4),
+(97, 25, 1), (98, 25, 2), (99, 25, 3), (100, 25, 4);

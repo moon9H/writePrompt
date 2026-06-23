@@ -16,7 +16,7 @@
 		WHERE user_id = #{userId}
 	</select>
 	
-	<insert id="insert" parameterType="Quiz" useGeneratedKeys="true" keyProperty="id">>
+	<insert id="insert" parameterType="Quiz" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO Quiz
 			(user_id, title, image, level)
 		VALUES
