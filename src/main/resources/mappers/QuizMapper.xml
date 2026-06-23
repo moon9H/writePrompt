@@ -6,25 +6,25 @@
 
 	<select id="select" resultType="Quiz">
 		SELECT id, user_id, title, image, level ,created_time
-		FROM quiz
+		FROM Quiz
 		WHERE id = #{id}
 	</select>
 	
 	<select id="selectAll" resultType="Quiz">
 		SELECT id, user_id, title, image, level ,created_time
-		FROM quiz
+		FROM Quiz
 		WHERE user_id = #{userId}
 	</select>
 	
 	<insert id="insert" parameterType="Quiz" useGeneratedKeys="true" keyProperty="id">>
-		INSERT INTO quiz
+		INSERT INTO Quiz
 			(user_id, title, image, level)
 		VALUES
 			(#{userId}, #{title}, #{image}, #{level})
 	</insert>
 	
 	<update id="update">
-		UPDATE quiz
+		UPDATE Quiz
 		<set>
 			<if test="title != null and title != ''">
 				title = #{title},
@@ -38,7 +38,7 @@
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM quiz
+		DELETE FROM Quiz
 		WHERE
 			id = #{id}
 		AND
