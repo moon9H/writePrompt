@@ -19,4 +19,8 @@ public interface MemberService {
 	
 	// 회원 삭제
 	int delete(int id);
+	
+	int updateRefreshToken(int id, String refreshToken);
+
+	int deleteRefreshToken(int id);
 }

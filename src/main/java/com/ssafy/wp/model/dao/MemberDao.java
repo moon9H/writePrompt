@@ -3,6 +3,7 @@ package com.ssafy.wp.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.ssafy.wp.model.dto.member.Member;
 import com.ssafy.wp.model.dto.play.QuizResult;
@@ -25,4 +26,8 @@ public interface MemberDao {
 	Member selectByEmail(String email);
 
 	List<QuizResult> selectQuizResultsByUserId(int userId);
+	
+	int updateRefreshToken(@Param("id") int id, @Param("refreshToken") String refreshToken);
+
+	int deleteRefreshToken(int id);
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
+
 <mapper namespace="com.ssafy.wp.model.dao.MemberDao">
-	
+
 	<select id="select" resultType="Member">
 		SELECT id, email, password, role, nickname,
-				age, gender, profile, created_time
+		age, gender, profile, created_time
 		FROM user
 		<where>
 			<if test="id != null and id != ''">
@@ -14,17 +14,17 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<insert id="insert" parameterType="Member"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO user
-			(email , password, role, nickname,
-			age, gender, profile)
+		(email , password, role, nickname,
+		age, gender, profile)
 		VALUES
-			(#{email}, #{password}, #{role}, #{nickname},
-			#{age}, #{gender}, #{profile})
+		(#{email}, #{password}, #{role}, #{nickname},
+		#{age}, #{gender}, #{profile})
 	</insert>
-	
+
 	<update id="update" parameterType="Member">
 		UPDATE user
 		<set>
@@ -43,17 +43,17 @@
 		</set>
 		WHERE id = #{id}
 	</update>
-	
+
 	<delete id="delete">
-		DELETE 
-			FROM user
-		WHERE 
-			id = #{id}
+		DELETE
+		FROM user
+		WHERE
+		id = #{id}
 	</delete>
-	
+
 	<select id="selectByEmail" resultType="Member">
 		SELECT id, email, password, role, nickname,
-				age, gender, profile, created_time
+		age, gender, profile, created_time
 		FROM user
 		<where>
 			<if test="email != null and email != ''">
@@ -61,16 +61,30 @@
 			</if>
 		</where>
 	</select>
-	
+
 	<select id="selectQuizResultsByUserId" resultType="QuizResult">
 		SELECT id,
-			   user_id,
-			   quiz_room_id,
-			   score,
-			   feedback,
-			   created_time
+		user_id,
+		quiz_room_id,
+		score,
+		feedback,
+		created_time
 		FROM QuizResult
 		WHERE user_id = #{userId}
 		ORDER BY created_time DESC
 	</select>
+
+	<update id="updateRefreshToken">
+		update user
+		set refresh_token =#{refreshToken}
+		where
+		id=#{id}
+	</update>
+
+
+	<update id="deleteRefreshToken">
+		UPDATE user
+		SET refresh_token = NULL
+		WHERE id = #{id}
+	</update>
 </mapper>
