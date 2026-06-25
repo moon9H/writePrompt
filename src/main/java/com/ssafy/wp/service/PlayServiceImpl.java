@@ -84,7 +84,9 @@ public class PlayServiceImpl implements PlayService {
 			avgScore += answer.getScore();
 		}
 		
-		return avgScore / results.size();
+		double average = avgScore / results.size();
+		
+		return Math.round(average * 100.0) / 100.0;
 	}
 	
 	private void saveFinalResult(int userId, int quizRoomId, PlayAnswerResponse response) {
